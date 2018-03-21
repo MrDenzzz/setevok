@@ -7,7 +7,7 @@
             <a href="https://myaccount.google.com/">
                 <icon name="google"></icon>
             </a>
-            <a href="https://mail.yandex.ru/">
+            <a href="https://mail.yandex.ru/" >
                 <icon name="fa-yandex"></icon>
             </a>
             <a href="https://account.mail.ru/">
