@@ -11,14 +11,14 @@
         <label for="password">Пароль</label>
         <input type="password" v-model="password"  minlength="8" placeholder="Пароль" required>
     </p>
-    <p v-if="(password != pass || mail != login) && password != login">Неверная Почта или Пароль</p>
+    <p v-if="check">Неверная Почта или Пароль</p>
     <p>
         {{mail}}<br>
         {{pass}}<br>
         </p>
     <p>
         <input @click="show('Modalreg')" type="submit" value="Регистрация">
-        <input type="submit" value="Войти">
+        <input @click="checker(check)" type="submit" value="Войти">
     </p>
             <modals-container name="Modalreg">
         <Modalreg/>
@@ -28,32 +28,43 @@
 </template>
 
 <script>
-import Modalreg from './layouts/Modalreg'
-
-
+import Modalreg from "./layouts/Modalreg";
 
 export default {
   name: "Index",
-    components: {
-     Modalreg,
-    },
+  components: {
+    Modalreg
+  },
   data() {
     return {
-        mail: 'z@.ru',
-        pass: '1',
-        login: '',
-        password: ''
+      mail: "z@.ru",
+      pass: "1",
+      login: "",
+      password: "",
+      check: false
     };
   },
-  methods : {
-      show(){
-           console.log("hi");
-          this.$modal.show(Modalreg, {
-            text: 'This text is passed as a property'
-            }, {
-            draggable: true
-            })
-      }
+  methods: {
+    checker : function(check){
+           
+           if (this.password != this.pass || this.mail != this.login){
+           this.check = true;
+           }else{
+            this.check = false;
+           }
+           
+      },
+    show() {
+      this.$modal.show(
+        Modalreg,
+        {
+          text: "This text is passed as a property"
+        },
+        {
+          draggable: true
+        }
+      );
+    }
   }
 };
 </script>
@@ -141,8 +152,8 @@ export default {
 .no-placeholder .style-form label {
     display: block;
 }
-.style-form input[type=submit]{
-    width 49%
-}
 
+.style-form input[type=submit] {
+    width: 49%;
+}
 </style>

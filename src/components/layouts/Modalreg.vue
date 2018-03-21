@@ -7,19 +7,19 @@
     </p>
  
     <p>    
-        <input type="password" placeholder="Email" required>
+        <input type="mail" placeholder="Email" required>
     </p> 
     
     <p> 
-        <input type="password" placeholder="Пароль" v-model='pass' minlength="8" required>
+        <input type="password"  minlength="8" placeholder="Пароль" v-model='pass' required>
     </p>
  
     <p>  
-        <input type="password" placeholder="Повторите пароль" v-model='pass2' minlength="8" required>
+        <input @focus="focused = true" @blur="focused = false" type="password" placeholder="Повторите пароль" v-model='pass2' required>
     </p>     
-            <p v-if="pass != pass2">Пароль не совпадает</p>
+            <p v-if="pass != pass2 && focused">Пароль не совпадает</p>
     <p>
-        <input @click="show('Modalmail')" type="submit" value="Подтвердить">
+        <input @click="show('Modalmail');hide('Modalreg')" type="submit" value="Подтвердить">
     </p>     
         <modals-container name="Modalmail">
         <modalmail/>
@@ -46,6 +46,13 @@ components:{
          methods : {
             show(){
                 this.$modal.show(Modalmail, {
+                    text: 'This text is passed as a property'
+                    }, {
+                    draggable: true
+                    })
+      },
+            hide(){
+                this.$modal.show(Modalreg, {
                     text: 'This text is passed as a property'
                     }, {
                     draggable: true
