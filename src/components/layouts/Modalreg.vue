@@ -10,10 +10,10 @@
      
         <input type="password"  minlength="8" placeholder="Пароль" v-model='newUser.pass' required>
      
-        <input @focus="focused = true" @blur="focused = false" type="password" placeholder="Повторите пароль" v-model='pass2' required>
+        <input @focus="this.focused = true" @blur="this.focused = false" type="password" placeholder="Повторите пароль" v-model='pass2' required>
         <p>{{pass2}}
             {{newUser.pass}}</p>
-        <p v-if="pass != pass2 && focused">Пароль не совпадает</p>
+        <p v-if="!((newUser.pass === pass2) === this.focused)">Пароль не совпадает</p>
         
     
         <button @click="madeWorker()" type="submit">Подтвердить</button>
@@ -36,10 +36,11 @@ export default {
   data() {
     return {
       pass2: "",
+      focused:true,
 
       newUser: {
         pass: "",
-        id: "124",
+        id: 124,
         userId: "",
         name: "",
         mail: "",
@@ -55,9 +56,9 @@ export default {
   methods: {
     madeWorker() {
       this.users.userId = this.id++;
-      this.id++;
-      this.$store.state.users[users.lenght++].push(newUser);
-      console.log(this.$store.state.users);
+      this.newUser.id++;
+      this.$store.state.users.push(this.newUser);
+      console.log(this.$store.state.users[3]);
     },
     show() {
       this.$modal.show(

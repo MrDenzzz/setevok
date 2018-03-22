@@ -20,6 +20,7 @@ export const store = new Vuex.Store({
               mail: "z@.com",
               pass: "2"
             }
-          ]
+          ],
+        
     }
 });
