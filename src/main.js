@@ -8,6 +8,8 @@ import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
 import VModal from 'vue-js-modal'
 
+import {store} from './store.js'
+
 Vue.use(VModal, { dynamic: true })
 
 
@@ -24,6 +26,7 @@ export default{
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
   

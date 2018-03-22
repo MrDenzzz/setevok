@@ -3,23 +3,39 @@
 <div class="style-form">
     
     <h1>Авторизация</h1>
-    <p>
-        <label for="login">Email</label>
-        <input v-model="login" type="text"  placeholder="Email" required>
-    </p>
-    <p>
-        <label for="password">Пароль</label>
-        <input type="password" v-model="password"  minlength="8" placeholder="Пароль" required>
-    </p>
-    <p v-if="check">Неверная Почта или Пароль</p>
-    <p>
-        {{mail}}<br>
-        {{pass}}<br>
-        </p>
-    <p>
-        <input @click="show('Modalreg')" type="submit" value="Регистрация">
-        <input @click="checker(check)" type="submit" value="Войти">
-    </p>
+    <form @submit.prevent="checker(check)">
+        <div>
+            <label for="login">Email</label>
+            <input v-model="login" type="text"  placeholder="Email" required>
+        </div>
+        <div>
+            <label for="password">Пароль</label>
+            <input type="password" v-model="password"  placeholder="Пароль" required><!--minlength="8"-->
+        </div>
+        <p v-if="check">Неверная Почта или Пароль</p>
+        <div>
+            <span>
+                {{users[0].mail}}
+            </span>
+            <span>
+                {{users[0].pass}}
+            </span>
+            <span>
+                {{users[1].mail}}
+            </span>
+            <span>
+                {{users[1].pass}}
+            </span>
+        </div>
+        <div>
+            <button type="submit">Войти</button>
+        </div>
+    </form>
+    <div>
+        У Вас нет аккаута? 
+        <button @click="show('Modalreg')" type="button">БИСТРА ПАШЕЛ РИГИСТРИРОВАЦЦА ПАДОНАК!11111</button>
+    </div>
+
             <modals-container name="Modalreg">
         <Modalreg/>
         </modals-container>
@@ -37,39 +53,46 @@ export default {
   },
   data() {
     return {
-      mail: "z@.ru",
-      pass: "1",
       login: "",
       password: "",
       check: false
     };
   },
+  computed: {
+      users() {
+          return this.$store.state.users 
+      }
+  },
   methods: {
-    checker : function(check){
-           
-           if (this.password != this.pass || this.mail != this.login){
-           this.check = true;
-           }else{
-            this.check = false;
-           }
-           
-      },
-    show() {
-      this.$modal.show(
-        Modalreg,
-        {
-          text: "This text is passed as a property"
-        },
-        {
-          draggable: true
+    checker: function(check) {
+      for (let i = 0; i < this.users.length; i++) {
+        if (
+          this.password === this.users[i].pass &&
+          this.login === this.users[i].mail
+        ) {
+          this.check = false;
+          this.$router.push({ path: this.users[i].path, params: { userId: 123 } });
+        } else {
+          console.log(this.users[i].pass);
+          this.check = true;
         }
-      );
+      }
+    },
+        show(){
+        this.$modal.show(Modalreg, {
+            text: 'This text is passed as a property'
+            }, {
+            draggable: true
+        })
     }
   }
 };
 </script>
 
 <style lang="stylus" scoped>
+span
+    display flex
+    align-self column
 .full-screen {
     width: 99vw;
     height: 98vh;
@@ -79,12 +102,10 @@ export default {
 }
 
 .style-form {
-    /* Size and position */
     width: 390px;
     margin: 120px auto 10px;
     padding: 15px;
     position: relative;
-    /* Font styles */
     font-family: 'Raleway', 'Lato', Arial, sans-serif;
     color: white;
     text-shadow: 0 3px 1px rgba(0, 0, 0, 0.5);
@@ -96,12 +117,11 @@ export default {
 }
 
 .style-form input[type=text], .style-form input[type=password] {
-    /* Size and position */
     width: 95%;
     padding: 8px 4px 8px 10px;
     margin-bottom: 15px;
-    /* Styles */
-    border: 1px solid #4e3043; /* Fallback */
+
+    border: 1px solid #4e3043; 
     border: 1px solid rgba(0, 0, 0, 0.2);
     background: rgba(0, 0, 0, 0.15);
     border-radius: 2px;
@@ -128,7 +148,6 @@ export default {
     box-shadow: 0px 0px 0.1px rgba(0, 0, 0, 1);
 }
 
-/* Fallback */
 .no-boxshadow .style-form input[type=text]:focus, .no-boxshadow .style-form input[type=password]:focus {
     outline: -10px solid rgba(255, 255, 255, 0.1);
 }
@@ -153,7 +172,8 @@ export default {
     display: block;
 }
 
-.style-form input[type=submit] {
-    width: 49%;
+button  {
+    width: 100%;
+    margin-bottom 15px
 }
 </style>
