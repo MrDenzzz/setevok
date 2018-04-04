@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Index from '@/components/Index'
 import Worker from '@/components/Worker'
 import Admin from '@/components/Admin'
+import ReclameOrder from '@/components/layouts/ReclameOrder'
 
 Vue.use(Router)
 
@@ -14,7 +15,7 @@ export default new Router({
       component: Index
     },
     {
-      path: '/worker',
+      path: '/worker/:userId/:city/:name',
       name: 'Worker',
       component: Worker
     },
@@ -22,6 +23,11 @@ export default new Router({
       path: '/admin',
       name: 'Admin',
       component: Admin
+    },
+    {
+      path: '/reclameOrder',
+      name: 'ReclameOrder',
+      component: ReclameOrder
     }
   ]
 })

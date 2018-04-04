@@ -45,6 +45,7 @@
 
 <script>
 import Modalreg from "./layouts/Modalreg";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Index",
@@ -58,11 +59,7 @@ export default {
       check: false
     };
   },
-  computed: {
-      users() {
-          return this.$store.state.users 
-      }
-  },
+  computed: mapGetters({ users: "allUsers" }),
   methods: {
     checker: function(check) {
       for (let i = 0; i < this.users.length; i++) {
@@ -71,34 +68,39 @@ export default {
           this.login === this.users[i].mail
         ) {
           this.check = false;
-          this.$router.push({ path: this.users[i].path, params: { userId: 123 } });
+          this.$router.push({
+            path: this.users[i].path + `/${this.users[i].userId}/${this.users[i].city}/${this.users[i].name}`,
+            params: {
+              userId: this.users[i].userId,
+              name: this.users[i].name,
+              city: this.users[i].city
+            }
+          });
         } else {
           console.log(this.users[i].pass);
           this.check = true;
         }
       }
     },
-        show(){
-        this.$modal.show(Modalreg, {
-            text: 'This text is passed as a property'
-            }, {
-            draggable: true
-        })
+    show() {
+      this.$modal.show(
+        Modalreg,
+        {
+          text: "This text is passed as a property"
+        },
+        {
+          draggable: true
+        }
+      );
     }
   }
 };
 </script>
 
 <style lang="stylus" scoped>
-span
-    display flex
-    align-self column
-.full-screen {
-    width: 99vw;
-    height: 98vh;
-    position: fixed;
-    z-index: -1;
-    background: #506371;
+span {
+    display: flex;
+    align-self: column;
 }
 
 .style-form {
@@ -120,8 +122,7 @@ span
     width: 95%;
     padding: 8px 4px 8px 10px;
     margin-bottom: 15px;
-
-    border: 1px solid #4e3043; 
+    border: 1px solid #4e3043;
     border: 1px solid rgba(0, 0, 0, 0.2);
     background: rgba(0, 0, 0, 0.15);
     border-radius: 2px;
@@ -158,6 +159,10 @@ span
     cursor: pointer;
 }
 
+.date:hover {
+    background-color: #435664;
+}
+
 .style-form label:hover ~ input {
     border-color: #000;
     transition: 0.5s;
@@ -172,8 +177,22 @@ span
     display: block;
 }
 
-button  {
+button {
     width: 100%;
-    margin-bottom 15px
+    margin-bottom: 15px;
+    border-radius: 5px;
+    transition: 0.2s;
+    background-color: #506371;
+    border: dashed 2px black;
+    font-size: 16pt;
+}
+
+button:hover {
+    background-color: #405361;
+}
+
+button:active {
+    background-color: rgba(50, 255, 50, 0.2);
+    border-color: white;
 }
 </style>

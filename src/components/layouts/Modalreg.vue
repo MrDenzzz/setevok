@@ -4,11 +4,13 @@
 
     <form @submit.prevent="show('Modalmail');hide('Modalreg')">
      
-        <input type="text"  placeholder="Имя" v-modal=users.name required>
+        <input type="text"  placeholder="Имя" v-modal=newUser.name required>
         
-        <input type="mail" placeholder="Email" v-model=users.mail required>
+        <input type="mail" placeholder="Email" v-model=newUser.mail required>
+
+        <input type="text" placeholder="Город в котором Вы будете проверять" v-model=newUser.city required>        
      
-        <input type="password"  minlength="8" placeholder="Пароль" v-model='newUser.pass' required>
+        <input type="password"  minlength="8" placeholder="Пароль не менее 8 символов" v-model='newUser.pass' required>
      
         <input @focus="this.focused = true" @blur="this.focused = false" type="password" placeholder="Повторите пароль" v-model='pass2' required>
         <p>{{pass2}}
@@ -27,6 +29,7 @@
 
 <script>
 import Modalmail from "./Modal-mail";
+import { mapGetters } from 'vuex';
 
 name: "Modalreg";
 components: {
@@ -39,26 +42,29 @@ export default {
       focused:true,
 
       newUser: {
-        pass: "",
-        id: 124,
-        userId: "",
         name: "",
+        pass: "",
+        userId: 124,
+        city: "",
         mail: "",
         path: "/worker"
       }
     };
   },
-  computed: {
-    users() {
-      return this.$store.state.users 
-    }
-  },
+  computed: mapGetters({users:"allUsers"}),
   methods: {
     madeWorker() {
       this.users.userId = this.id++;
       this.newUser.id++;
-      this.$store.state.users.push(this.newUser);
-      console.log(this.$store.state.users[3]);
+      this.users.push(this.newUser);
+      this.$router.push({
+            path: this.newUser.path + `/${this.newUser.userId}/${this.newUser.city}/${this.newUser.name}`,
+            params: {
+              userId: this.newUser.userId,
+              name: this.newUser.name,
+              city: this.newUser.city
+            }
+          });
     },
     show() {
       this.$modal.show(
@@ -87,6 +93,57 @@ export default {
 </script>
 
 <style lang="stylus">
+.style-form {
+    position: relative;
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+    color: white;
+    text-shadow: 0 3px 1px rgba(0, 0, 0, 0.5);
+}
+
+.style-form h1 {
+    font-size: 22px;
+    padding-bottom: 15px;
+}
+
+.style-form input[type=text], .style-form input[type=password], .style-form input[type=mail] {
+    padding: 8px 4px 8px 10px;
+    margin-bottom: 15px;
+    border: 1px solid #4e3043;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 2px;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    -webkit-transition: all 0.7s linear;
+    -moz-transition: all 0.7s linear;
+    -ms-transition: all 0.7s linear;
+    -o-transition: all 0.7s linear;
+    transition: all 0.7s linear;
+    /* Font styles */
+    font-family: 'Raleway', 'Lato', Arial, sans-serif;
+    color: #fff;
+    font-size: 13px;
+}
+
+.style-form input[type=text]:hover, .style-form input[type=password], .style-form input[type=mail]:hover {
+    border-color: #435664;
+    box-shadow: inset 123px 108px -198px #435664;
+    transition: all 0.4s linear;
+}
+
+.style-form input[type=text]:focus, .style-form input[type=password], .style-form input[type=mail]:focus, .style-form input[type=submit]:focus {
+    box-shadow: 0px 0px 0.1px rgba(0, 0, 0, 1);
+}
+
+.no-boxshadow .style-form input[type=text]:focus, .no-boxshadow .style-form input[type=password], .style-form input[type=mail]:focus {
+    outline: -10px solid rgba(255, 255, 255, 0.1);
+}
+
+.style-form label {
+    display: none;
+    padding: 0 0 5px 2px;
+    cursor: pointer;
+}
 .modal-form {
     text-align: center;
 }
