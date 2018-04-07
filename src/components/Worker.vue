@@ -1,12 +1,12 @@
 <template>
     <div class="full-screen">
         <div class="style-form">
-            <h2>Исполнитель {{$route.params.name}} <router-link to="/"><button @click="this.$route.params.path" class="exit">Выход</button></router-link></h2>
+            <h2>Исполнитель {{$route.params.name}} <router-link to="/"><button @click="$route.params.path" class="exit">Выход</button></router-link></h2>
             <div class="madeOrder">
-                <MadeOrder :Orders="newOrder" />
+                <made-order :orders="newOrder" />
             </div>
             <div class="orders">
-                <Orders :newOrder="Orders"></Orders>
+                <orders :new-order="orders"></orders>
             </div>
         </div>
     </div>
@@ -18,35 +18,36 @@ import Orders from "./layouts/Orders";
 import { mapGetters } from "vuex";
 
 export default {
+  name: "Worker",
+  components: {
+    MadeOrder,
+    Orders
+  },
   data() {
     return {
       newOrder: {}
     };
   },
-  name: "Worker",
-
-  components: {
-    MadeOrder,
-    Orders
+  computed: {
+    ...mapGetters(["orders"])
   },
   methods: {
     viewDetails(order) {
       this.selectedOrder = order;
     }
   },
-  computed: mapGetters({Orders : "allOrders"})     
 };
 </script>
 
 <style lang="stylus">
-
-body
+body {
     width: 100vw;
     height: 100vh;
     z-index: -1;
     background: #506371;
     overflow-y: auto;
     overflow-x: hidden;
+}
 
 .style-form {
     padding: 30px;
@@ -59,13 +60,15 @@ body
 .orders {
     margin: 30px;
 }
-.exit{
-    background-color rgba(50,255,50,0.2);
-    color white
-    border-color white
-} 
-    
-h2
-    display flex
-    justify-content space-between
+
+.exit {
+    background-color: rgba(50, 255, 50, 0.2);
+    color: white;
+    border-color: white;
+}
+
+h2 {
+    display: flex;
+    justify-content: space-between;
+}
 </style>

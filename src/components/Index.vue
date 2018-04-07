@@ -33,24 +33,18 @@
     </form>
     <div>
         У Вас нет аккаута? 
-        <button @click="show('Modalreg')" type="button">БИСТРА ПАШЕЛ РИГИСТРИРОВАЦЦА ПАДОНАК!11111</button>
+        <router-link to="/registration"><button type="button">БИСТРА ПАШЕЛ РИГИСТРИРОВАЦЦА ПАДОНАК!11111</button></router-link>
     </div>
-
-            <modals-container name="Modalreg">
-        <Modalreg/>
-        </modals-container>
 </div>
 </div>
 </template>
 
 <script>
-import Modalreg from "./layouts/Modalreg";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Index",
   components: {
-    Modalreg
   },
   data() {
     return {
@@ -69,7 +63,11 @@ export default {
         ) {
           this.check = false;
           this.$router.push({
-            path: this.users[i].path + `/${this.users[i].userId}/${this.users[i].city}/${this.users[i].name}`,
+            path:
+              this.users[i].path +
+              `/${this.users[i].userId}/${this.users[i].city}/${
+                this.users[i].name
+              }`,
             params: {
               userId: this.users[i].userId,
               name: this.users[i].name,

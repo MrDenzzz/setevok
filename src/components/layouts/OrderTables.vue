@@ -18,12 +18,19 @@ export default {
   methods: {
 
   },
-    computed: {
-    ...mapGetters(["orders"])
-  },
+  computed: mapGetters({orders: "allOrders", OrderDates: "OrderDates"})
   }
 </script>
 <style lang="stylus" scoped>
+.madeOrder {
+    background: linear-gradient(to top, #506371, #405361);
+    border: inset 1px #405361;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
 
 @media (max-width: 800px) {
     .madeOrder {
@@ -32,4 +39,11 @@ export default {
     }
 }
 
+.date {
+    // display flex
+    // justify-content center
+    // flex-direction column
+    // align-items center
+    padding: 10px;
+}
 </style>

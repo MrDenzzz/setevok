@@ -5,6 +5,9 @@
             <label for="p">Дата проверки</label><p>{{today}}</p> <p>{{$route.params.date}}</p>
         </div>
         <div class="date">
+            <label for="p">Исполнитель</label><p>{{$route.params.name}}</p>
+        </div>
+        <div class="date">
             <label for="p">Город</label><p>{{$route.params.city}}</p>
         </div>
         <div class="date">
@@ -31,7 +34,7 @@
 
 <script>
 export default {
-  name: "madeOrder",
+  name: "made-order",
   data() {
     return {
       newOrder: {
