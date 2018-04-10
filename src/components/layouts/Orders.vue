@@ -15,12 +15,12 @@ export default {
   components: {
     Order
   },
-  methods: {
-
-  },
     computed: {
-    ...mapGetters(["orders"])
-  },
+    ...mapGetters(["orders"]),
+        getIdOrder() {
+            return localStorage.setItem("id", this.orders.length); 
+        }
+    },
   }
 </script>
 <style lang="stylus" scoped>

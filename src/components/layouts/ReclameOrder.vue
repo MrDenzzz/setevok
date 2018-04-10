@@ -3,23 +3,21 @@
         <form @submit.prevent="orderFilled()">
         <div class="calendar">
             <label for=""> Дата проверки
-                <!-- <datepicker :format="customFormatter" v-model="this.orders[orderId].date" language="ru"></datepicker> -->
-                <datepicker v-model="orders[orderId].date" language="ru"></datepicker>
+                <datepicker :format="customFormatter(this.orders[orderId].date)" v-model="orders[orderId].date" language="ru"></datepicker>
             </label>
         </div>
-        <label class="ordersDetales" for="input">Плакаты<input v-model="orders[orderId].poster" type="text"/></label>
-        <label class="ordersDetales" for="input">Сити-постеры<input v-model="orders[orderId].siti" type="text"/></label>
-        <label class="ordersDetales" for="input">Хард-постеры<input v-model="orders[orderId].hard" type="text"/></label>
-        <label class="ordersDetales" for="input">Флаеры<input v-model="orders[orderId].flaers" type="text"/></label>
-        <label class="ordersDetales" for="input">Стенди-постеры <input v-model="orders[orderId].stand" type="text"/></label>
-        <label class="ordersDetales" for="input" @change="onFileSelected">Фото-отчеты 
-            {{orderId}}{{this.orders[orderId].date}}
+        <label class="ordersDetales" for="input">Плакаты<input v-model="orders[orderId].poster[0]" type="text"/><input v-model="orders[orderId].poster[1]" type="checkbox"/><p>Обещали повесить</p></label>
+        <label class="ordersDetales" for="input">Сити-постеры<input v-model="orders[orderId].siti[0]" type="text"/><input v-model="orders[orderId].siti[1]" type="checkbox"/><p>Обещали повесить</p></label>
+        <label class="ordersDetales" for="input">Хард-постеры<input v-model="orders[orderId].hard[0]" type="text"/><input v-model="orders[orderId].hard[1]" type="checkbox"/><p>Обещали повесить</p></label>
+        <label class="ordersDetales" for="input">Флаеры<input v-model="orders[orderId].flaers[0]" type="text"/><input v-model="orders[orderId].flaers[1]" type="checkbox"/><p>Обещали повесить</p></label>
+        <label class="ordersDetales" for="input">Стенди-постеры <input v-model="orders[orderId].stand[0]" type="text"/><input v-model="orders[orderId].stand[1]" type="checkbox"/><p>Обещали повесить</p></label>
+        <label class="ordersDetales" for="input">Фото-отчеты
             <vue-clip :options="options">
                 
                 <template slot="clip-uploader-action">
                     <div class="uploader-action">
-                        <div class="dz-message">
-                            Бросьте сюда файлы
+                        <div @click="addPicture(file.dataUrl)" class="dz-message">
+                            <i class="fa fa-upload"></i> Бросьте сюда файлы
                         </div>
                     </div>
                 </template>
@@ -28,14 +26,15 @@
                      <div class="uploader-files">
                          <div class="uploader-file" v-for="file in props.files">
                              <div class="file-avatar">
-                                 <img @change="addPicture(file.dataUrl)" 
-                                      :src="file.dataUrl" alt="">
+                                 <img  
+                                       :src="file.dataUrl" alt=""> 
+                                       <!-- Отсюда как-то надо достать file.dataUrl -->
                              </div>
                              {{ file.name }}
                          </div>
                      </div>
                     <div v-for="file in file.props">
-                        <img v-bind:src="file.dataUrl" />
+                        <img :src="file.dataUrl" />
                         {{ file.name }} {{ file.status }}
                     </div>
                 </template>
@@ -49,6 +48,7 @@
 
 <script>
 import Datepicker from "vuejs-datepicker";
+import Moment from 'moment';
 import { mapGetters } from "vuex";
 
 export default {
@@ -74,11 +74,20 @@ export default {
       selectedFile = event.target.files[0];
     },
     customFormatter(date) {
-      return moment(date).format("MMMM Do YYYY, h:mm:ss a");
+    this.orders[this.orderId].date = Moment(date).format("YYYY-MM-DD");
+      return Moment(date).format("YYYY-MM-DD");
     },
     addPicture(picture) {
-      console.log(this.pictures, "this.pictures");
-      this.pictures[this.pictures.length] = picture;
+      console.log(this.picture, "this.picture");
+      this.$store
+            .dispatch("addPicture", this.file.dataUrl, this.orderId)
+            .then(() => {
+              console.log("Success order data request");
+            })
+            .catch(() => {
+              console.log("Error order data request", file.dataUrl, this.orderId);
+            });
+      console.log(this.orders[this.orderId].pictures, "this.pictures");
     },
     orderFilled() {
       for (let i = 0; i > this.orders[this.orders.lenght]; i++) {
@@ -113,16 +122,23 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.orderDetales {
-    justify-content: space-between;
+.style-form
+    display flex
+
+.ordersDetales {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: baseline;
 }
 
 .vdp-datepicker {
     color: black !important;
 }
 
+
 .style-form input[type=text] {
-    width: 100%;
+    width: 30%;
     display: flex;
     padding: 8px 4px 8px 10px;
     margin-bottom: 15px;

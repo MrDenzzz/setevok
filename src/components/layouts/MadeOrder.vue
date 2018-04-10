@@ -1,14 +1,15 @@
 <template>
     <div>
-        <form class="madeOrder">
+        <!-- <form class="madeOrder"> -->
+        <div class="madeOrder">
         <div class="date">
-            <label for="p">Дата проверки</label><p>{{today}}</p> <p>{{$route.params.date}}</p>
+            <label for="p">Дата проверки</label><p>{{today}}</p> <p>{{newOrder.date}}</p>
         </div>
         <div class="date">
-            <label for="p">Исполнитель</label><p>{{$route.params.name}}</p>
+            <label for="p">Исполнитель</label><p>{{name}}</p>
         </div>
         <div class="date">
-            <label for="p">Город</label><p>{{$route.params.city}}</p>
+            <label for="p">Город</label><p>{{city}}</p>
         </div>
         <div class="date">
             <label for="p">Кинотеатр</label><p><select  v-model="newOrder.cinema" name="cinema" required> 
@@ -24,26 +25,40 @@
         </div>
         <div class="date">
             <label for="p">Тип проверки</label>
-                <p>Скрытая<input v-model="newOrder.type" name="type" value="1" type="radio" required></p>
-                <p>Открытая<input v-model="newOrder.type" name="type" value="2" type="radio" required></p>
+                <p>Скрытая<input v-model="newOrder.type" name="type" value="Скрытая" type="radio" required></p>
+                <p>Открытая<input v-model="newOrder.type" name="type" value="Открытая" type="radio" required></p>
         </div>
-        <button @click="madeOrder(newOrder)" type="submit">Создать проверку</button> 
-        </form>
+        <button type="submit" @click="madeOrder(newOrder)">Создать проверку</button> 
+        <!-- </form> -->
+        </div>
     </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "made-order",
   data() {
     return {
+      name: localStorage.getItem("name"),
+      city: localStorage.getItem("city"),
+
       newOrder: {
-        date: "2012-12-12",
-        city: "Волков",
+        id: this.$parent.idOrder,
+        date: "2014-23-02",
+        city: "city",
         cinema: "Выберите кинотеатр",
-        type: "",
         kind: "",
-        typeOrder: ""
+        type: "",
+        name: "Олег",
+        siti: [],
+        hard: [],
+        poster: [],
+        flaers: [],
+        stand: [],
+        pictures: [],
+        filled: false
       }
     };
   },
@@ -58,9 +73,7 @@ export default {
         this.stableDate(todayDate.getDay())
       );
     },
-    customOrder() {
-      return this.$store.getters.customOrder;
-    }
+    ...mapGetters(["orders"])
   },
   methods: {
     stableDate(normalizeDate) {
@@ -70,16 +83,26 @@ export default {
       return normalizeDate;
     },
     madeOrder(newOrder) {
-        console.log(newOrder, 'newOrder');
       if (
         !newOrder.kind ||
         !newOrder.type ||
         newOrder.cinema === "Выберите кинотеатр"
-      )
+      ) {
         return false;
-      this.$emit("newOrder", newOrder);
-      console.log(this);
-      return this.$store.state.orders.push(newOrder);
+      } else {
+        console.log(this.newOrder, "djn")
+        this.$emit("newOrder", this.newOrder);
+        this.$store
+          .dispatch("madeNewOrder", this.newOrder)
+          .then(() => {
+            console.log("Success order data request");
+          })
+          .catch(() => {
+            console.log("Error order data request");
+          });
+        return;
+        return console.log(this.orders);
+      }
     }
   }
 };

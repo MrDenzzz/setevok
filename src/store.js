@@ -25,35 +25,35 @@ export const store = new Vuex.Store({
       }
     ],
     orders: [{
-        id: "0",
-        date: null,
+        id: 0,
+        date: "2012-22-22",
         city: "Волков",
         cinema: "dubay",
         kind: "Реклама",
         type: "Открытая",
         name: "Олег",
-        siti: "2",
-        hard: "2",
-        poster:"2",
-        flaers:"1000",
-        stand: "2",
-        pictures: ["weefew","wefawef"],
+        siti: ["2", false],
+        hard: ["2", false],
+        poster: ["2", false],
+        flaers:["1000", false],
+        stand: ["2", false],
+        pictures: [],
         filled: false
       },
       {
-        id: "1",
-        date: null,
+        id: 1,
+        date: "2012-22-22",
         city: "Волков",
         cinema: "dubay",
         kind: "Сеансы",
         type: "Скрытая",
         name: "Олег",
-        poster: "1",
-        flaers:"500",
-        siti: "1",
-        hard: "1",
-        stand: "0",
-        pictures: ["weefew","wefawef"],
+        poster: ["1", false],
+        flaers: ["500", false],
+        siti: ["1", false],
+        hard: ["1", false],
+        stand: ["0", false],
+        pictures: [],
         filled: false
       },
     ],
@@ -70,26 +70,36 @@ export const store = new Vuex.Store({
     ]
   },
   actions: {
-    orderDataRequest: ({commit, dispatch}, orderData) => {
+    orderDataRequest: ({commit, dispatch}, orders) => {
       return new Promise((resolve, reject) => {
-        commit('NEW_ORDER_DATA', orderData);  
+        commit('NEW_ORDER_DATA', orders);  
+      });
+    },
+    madeNewOrder: ({commit, dispatch}, newOrder) => {
+      return new Promise((resolve, reject) => {
+        commit('NEW_ORDER', newOrder);
+      })
+    },
+    addPicture: ({commit, dispatch}, picture, orderId) => {
+      return new Promise((resolve, reject) => {
+        commit('ADD_PICTURE', picture, orderId);  
       });
     }
   },
   mutations: {
-    NEW_ORDER_DATA(state, orderData) {
-      for (let i = 0; i < state.orderDates.length; i++) {
-        if (orderData[i].filled == true || "0") {
-          state.orderDates.push(orders[orderId]);
-        }
+    NEW_ORDER_DATA(state, orders) {
+          state.orders.push(orders[orderId]);
+        },
+    NEW_ORDER(state, newOrder) {
+      state.orders.push(newOrder);
+      },
+    ADD_PICTURE(state, picture, orderId) {
+      state.orders[this.orderId].pictures.push(picture);
       }
-    }
-  },
+    },
   getters: {
     orders:state => state.orders,
-    customOrder: state => state.customOrder,
     allUsers: state => state.users,
-    orderDates: state => state.OrderDates
 
   },
 });

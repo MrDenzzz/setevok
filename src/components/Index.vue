@@ -62,17 +62,12 @@ export default {
           this.login === this.users[i].mail
         ) {
           this.check = false;
+          localStorage.setItem("userId",this.users[i].userId);
+          localStorage.setItem("city",this.users[i].city);
+          localStorage.setItem("name",this.users[i].name);          
           this.$router.push({
             path:
-              this.users[i].path +
-              `/${this.users[i].userId}/${this.users[i].city}/${
-                this.users[i].name
-              }`,
-            params: {
-              userId: this.users[i].userId,
-              name: this.users[i].name,
-              city: this.users[i].city
-            }
+              this.users[i].path
           });
         } else {
           console.log(this.users[i].pass);

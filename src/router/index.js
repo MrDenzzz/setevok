@@ -16,12 +16,12 @@ export default new Router({
       component: Index
     },
     {
-      path: '/worker/:userId/:city/:name',
+      path: '/worker',
       name: 'Worker',
       component: Worker
     },
     {
-      path: '/admin/:userId/:city/:name',
+      path: '/admin',
       name: 'Admin',
       component: Admin
     },

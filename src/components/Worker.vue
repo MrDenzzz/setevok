@@ -1,9 +1,9 @@
 <template>
     <div class="full-screen">
         <div class="style-form">
-            <h2>Исполнитель {{$route.params.name}} <router-link to="/"><button @click="$route.params.path" class="exit">Выход</button></router-link></h2>
+            <h2>Исполнитель {{name}}{{idOrder}} <router-link to="/"><button  class="exit">Выход</button></router-link></h2>
             <div class="madeOrder">
-                <made-order :orders="newOrder" />
+                <made-order :idOrder=idOrder :orders="newOrder" />
             </div>
             <div class="orders">
                 <orders :new-order="orders"></orders>
@@ -25,15 +25,14 @@ export default {
   },
   data() {
     return {
-      newOrder: {}
+      newOrder: {},
+      name: localStorage.getItem("name"),
     };
   },
   computed: {
-    ...mapGetters(["orders"])
-  },
-  methods: {
-    viewDetails(order) {
-      this.selectedOrder = order;
+    ...mapGetters(["orders"]),
+    idOrder: function() {
+        return this.orders.length;
     }
   },
 };
