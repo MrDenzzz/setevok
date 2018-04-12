@@ -32,11 +32,22 @@ export const store = new Vuex.Store({
         kind: "Реклама",
         type: "Открытая",
         name: "Олег",
-        siti: ["2", false],
-        hard: ["2", false],
-        poster: ["2", false],
-        flaers:["1000", false],
-        stand: ["2", false],
+        
+
+        poster: [0, false],
+        flaers: [0, false],
+        siti: [0, false],
+        hard: [0, false],
+        stand: [0, false],
+
+        time: "0",
+        sessions: "0",
+        people: "0",
+        cost: "0",
+        hall: "0",
+        row: "0",
+        seat: "0",
+
         pictures: [],
         filled: false
       },
@@ -48,11 +59,21 @@ export const store = new Vuex.Store({
         kind: "Сеансы",
         type: "Скрытая",
         name: "Олег",
-        poster: ["1", false],
-        flaers: ["500", false],
-        siti: ["1", false],
-        hard: ["1", false],
-        stand: ["0", false],
+
+        poster: [0, false],
+        flaers: [0, false],
+        siti: [0, false],
+        hard: [0, false],
+        stand: [0, false],
+
+        time: "0",
+        sessions: "0",
+        people: "0",
+        cost: "0",
+        hall: "0",
+        row: "0",
+        seat: "0",
+
         pictures: [],
         filled: false
       },

@@ -28,7 +28,7 @@
                 <p>Скрытая<input v-model="newOrder.type" name="type" value="Скрытая" type="radio" required></p>
                 <p>Открытая<input v-model="newOrder.type" name="type" value="Открытая" type="radio" required></p>
         </div>
-        <button type="submit" @click="madeOrder(newOrder)">Создать проверку</button> 
+        <button @click="madeOrder(newOrder)">Создать проверку</button> 
         <!-- </form> -->
         </div>
     </div>
@@ -52,11 +52,21 @@ export default {
         kind: "",
         type: "",
         name: "Олег",
+
         siti: [],
         hard: [],
         poster: [],
         flaers: [],
         stand: [],
+
+        time: "",
+        sessions: "",
+        people: "",
+        cost: "",
+        hall: "",
+        row: "",
+        seat: "",
+
         pictures: [],
         filled: false
       }

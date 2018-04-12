@@ -1,7 +1,7 @@
 <template>
     <div class="full-screen">
         <div class="style-form">
-            <h2>Исполнитель {{name}}{{idOrder}} <router-link to="/"><button  class="exit">Выход</button></router-link></h2>
+            <h2>Исполнитель {{name}} <router-link to="/"><button  class="exit">Выход</button></router-link></h2>
             <div class="madeOrder">
                 <made-order :idOrder=idOrder :orders="newOrder" />
             </div>

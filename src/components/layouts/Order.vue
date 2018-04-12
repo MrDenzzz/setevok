@@ -1,5 +1,6 @@
 <template>
-        <form class="madeOrder">
+        <!-- <form class="madeOrder"> -->
+        <div class="madeOrder">
         <div class="date">
             <label for="p">Дата конца проверки</label>
             <p>{{order.date}}</p>
@@ -27,7 +28,8 @@
         <div class="date">
             <button @click="changeOrder(order.id)" type="submit">Обновить отчет</button>            
         </div>
-        </form>
+        </div>
+        <!-- </form> -->
 </template>
 
 <script>
@@ -41,21 +43,28 @@ export default {
   },
   methods: {
     changeOrder: function(id) {
-        console.log(id);
-      if (this.order.kind === "Реклама")
+      console.log(id);
+      if (this.order.kind === "Реклама") {
         this.$router.push({
           path: (this.order.path = "/reclameorder" + `/${id}`),
           params: {
-            id: this.order.id,
+            id: this.order.id
           }
         });
+      } else {
+        this.$router.push({
+          path: (this.order.path = "/cinemaorder" + `/${id}`),
+          params: {
+            id: this.order.id
+          }
+        });
+      }
     }
   }
 };
 </script>
 
 <style lang="stylus" scoped>
-
 .madeOrder {
     background: linear-gradient(to top, #506371, #405361);
     border: inset 1px #405361;
@@ -65,7 +74,7 @@ export default {
     justify-content: space-between;
     flex-wrap: wrap;
     transition: 0.3s;
-} 
+}
 
 .date {
     // display flex

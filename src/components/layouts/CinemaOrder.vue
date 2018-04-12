@@ -6,11 +6,13 @@
                 <datepicker :format="customFormatter(this.orders[orderId].date)" v-model="orders[orderId].date" language="ru"></datepicker>
             </label>
         </div>
-        <label class="ordersDetales" for="input">Плакаты<input v-model="orders[orderId].poster[0]" type="text"/><input v-model="orders[orderId].poster[1]" type="checkbox"/><p>Обещали повесить</p></label>
-        <label class="ordersDetales" for="input">Сити-постеры<input v-model="orders[orderId].siti[0]" type="text"/><input v-model="orders[orderId].siti[1]" type="checkbox"/><p>Обещали повесить</p></label>
-        <label class="ordersDetales" for="input">Хард-постеры<input v-model="orders[orderId].hard[0]" type="text"/><input v-model="orders[orderId].hard[1]" type="checkbox"/><p>Обещали повесить</p></label>
-        <label class="ordersDetales" for="input">Флаеры<input v-model="orders[orderId].flaers[0]" type="text"/><input v-model="orders[orderId].flaers[1]" type="checkbox"/><p>Обещали повесить</p></label>
-        <label class="ordersDetales" for="input">Стенди-постеры <input v-model="orders[orderId].stand[0]" type="text"/><input v-model="orders[orderId].stand[1]" type="checkbox"/><p>Обещали повесить</p></label>
+        <label class="ordersDetales" for="input">Время<input v-model="orders[orderId].time" type="text"/></label>
+        <label class="ordersDetales" for="input">Количество сеансов в этот день<input v-model="orders[orderId].sessions" type="text"/></label>
+        <label class="ordersDetales" for="input">Количество зрителей<input v-model="orders[orderId].people" type="text"/></label>
+        <label class="ordersDetales" for="input">Цена билета<input v-model="orders[orderId].cost" type="text"/></label>
+        <label class="ordersDetales" for="input">Зал <input v-model="orders[orderId].hall" type="text"/></label>
+        <label class="ordersDetales" for="input">Ряд <input v-model="orders[orderId].row" type="text"/></label>
+        <label class="ordersDetales" for="input">Место <input v-model="orders[orderId].seat" type="text"/></label>
         <label class="ordersDetales" for="input">Фото-отчеты
             <vue-clip :options="options">
                 
@@ -52,7 +54,7 @@ import Moment from 'moment';
 import { mapGetters } from "vuex";
 
 export default {
-  name: "ReclameOrder",
+  name: "cinemaorder",
   components: {
     Datepicker
   },
@@ -124,8 +126,6 @@ export default {
 <style lang="stylus" scoped>
 .style-form
     display flex
-    flex-direction: column;
-    width 400px
 
 .ordersDetales {
     display: flex;
