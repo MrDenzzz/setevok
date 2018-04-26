@@ -13,6 +13,10 @@
             <label for="p">Кинотеатр</label>
             <p>{{report.cinema}}</p>
         </div>
+          <div class="date">
+            <label for="p">Кинотеатр</label>
+            <p>{{report.film}}</p>
+          </div>
         <div class="date">
             <label for="p">Исполнитель</label>
             <p>{{report.name}}</p>

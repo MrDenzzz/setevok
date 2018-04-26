@@ -5,7 +5,8 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    users: [{
+    users: [
+      {
         userId: 123,
         name: "Олег",
         part: "worker",
@@ -24,12 +25,14 @@ export const store = new Vuex.Store({
         pass: "2"
       }
     ],
-    reports: [{
+    reports: [
+      {
         id: 0,
         userId: 123,
         date: "2012-22-22",
         city: "Волков",
         cinema: "dubay",
+        film: "dobby2",
         kind: "Реклама",
         type: "Открытая",
         name: "Олег",
@@ -58,6 +61,7 @@ export const store = new Vuex.Store({
         date: "2012-22-22",
         city: "Волков",
         cinema: "dubay",
+        film: "dobby",
         kind: "Сеансы",
         type: "Скрытая",
         name: "Олег",
@@ -80,16 +84,56 @@ export const store = new Vuex.Store({
         filled: false
       },
     ],
-    cinemas: [{
+    cinemas: [
+      {
         city: "Питер",
         cinema1: "Аврора",
         cinema2: "Лиговъ"
       },
+    ],
+    // orderList: [
+    //   {
+    //     id: "0",
+    //     order: "dobby",
+    //   },
+    //   {
+    //     id: "1",
+    //     order: "dodo",
+    //   },
+    //   {
+    //     id: "2",
+    //     order: "dodo2",
+    //   },
+    // ],
+    orders:[
       {
-        city: "Mосква",
-        cinema1: "alla",
-        cinema2: ";sdf;"
+        orderId: 0,
+        film: "dobby",
+        cinema: ["11111", "Аврора", "Лигов"],
+        kind: "Реклама",
+        type: "Открытая",
+      },
+      {
+        orderId: 1,
+        film: "dobby2",
+        cinema: ["11111", "111", "Лигов"],
+        kind: "Сеансы",
+        type: "Скрытая",
       }
+      //   : {
+      //   city:"Питер",
+      //   cinema:[
+      //     "1111111",
+      //     "admdnr"
+      //   ]
+      // },
+      // city2: {
+      //   city:"Москва",
+      //   cinema:[
+      //     "111",
+      //     "dodo"
+      //   ]
+      // }
     ]
   },
   actions: {
@@ -101,6 +145,11 @@ export const store = new Vuex.Store({
     madeNewReport: ({commit, dispatch}, newReport) => {
       return new Promise((resolve, reject) => {
         commit('NEW_Report', newReport);
+      })
+    },
+    madeNewOrder: ({commit, dispatch}, newOrder) => {
+      return new Promise((resolve, reject) => {
+        commit('NEW_Order', newOrder);
       })
     },
     madeNewUser: ({commit, dispatch}, newUser) => {
@@ -121,6 +170,9 @@ export const store = new Vuex.Store({
     NEW_Report(state, newReport) {
       state.reports.push(newReport);
       },
+    NEW_Order(state, newOrder) {
+      state.orders.push(newOrder);
+    },
     NEW_USER(state, newUser) {
       state.users.push(newUser);
       },
@@ -129,8 +181,9 @@ export const store = new Vuex.Store({
       }
     },
   getters: {
-    reports:state => state.reports,
+    reports: state => state.reports,
     allUsers: state => state.users,
+    orders: state => state.orders,
 
   },
 });

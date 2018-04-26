@@ -1,7 +1,11 @@
 <template>
     <div class="full-screen">
         <div class="style-form">
-            <h2>Исполнитель {{name}} <router-link to="/"><button  class="exit">Выход</button></router-link></h2>
+            <h2>Исполнитель {{name}}
+              <router-link to="/">
+              <button  class="exit">Выход</button>
+              </router-link>
+            </h2>
             <div class="madeReport">
                 <made-Report :name="name" :idReport=idReport :reports="newReport" />
             </div>

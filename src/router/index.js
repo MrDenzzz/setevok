@@ -22,7 +22,7 @@ export default new Router({
       component: Worker
     },
     {
-      path: '/admin',
+      path: '/admin/:userId',
       name: 'Admin',
       component: Admin
     },

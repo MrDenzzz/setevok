@@ -18,6 +18,13 @@
                                             <option >11111111</option>
                                         </select></p>
         </div>
+          <div class="date">
+            <label for="p">Фильм</label><p><select  v-model="newReport.film" name="cinema" required>
+            <option selected disabled>Выберите фильм</option>
+            <option >dobby2</option>
+            <option >dobby</option>
+          </select></p>
+          </div>
         <div class="date">
             <label for="p">Вид проверки</label>
                 <p>Реклама<input v-model="newReport.kind" name="kind" value="Реклама" type="radio" required></p>
@@ -50,6 +57,7 @@ export default {
         city: this.$parent.name,
         cinema: "Выберите кинотеатр",
         kind: "",
+        film:"Выберите фильм",
         type: "",
         name: this.$parent.name,
 
@@ -100,7 +108,6 @@ export default {
       ) {
         return false;
       } else {
-        console.log(this.newReport, "djn")
         this.$emit("newReport", this.newReport);
         this.$store
           .dispatch("madeNewReport", this.newReport)
