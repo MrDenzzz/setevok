@@ -24,15 +24,16 @@ export const store = new Vuex.Store({
         pass: "2"
       }
     ],
-    orders: [{
+    reports: [{
         id: 0,
+        userId: 123,
         date: "2012-22-22",
         city: "Волков",
         cinema: "dubay",
         kind: "Реклама",
         type: "Открытая",
         name: "Олег",
-        
+
 
         poster: [0, false],
         flaers: [0, false],
@@ -53,6 +54,7 @@ export const store = new Vuex.Store({
       },
       {
         id: 1,
+        userId: 123,
         date: "2012-22-22",
         city: "Волков",
         cinema: "dubay",
@@ -91,35 +93,43 @@ export const store = new Vuex.Store({
     ]
   },
   actions: {
-    orderDataRequest: ({commit, dispatch}, orders) => {
+    ReportDataRequest: ({commit, dispatch}, reports) => {
       return new Promise((resolve, reject) => {
-        commit('NEW_ORDER_DATA', orders);  
+        commit('NEW_Report_DATA', reports);
       });
     },
-    madeNewOrder: ({commit, dispatch}, newOrder) => {
+    madeNewReport: ({commit, dispatch}, newReport) => {
       return new Promise((resolve, reject) => {
-        commit('NEW_ORDER', newOrder);
+        commit('NEW_Report', newReport);
       })
     },
-    addPicture: ({commit, dispatch}, picture, orderId) => {
+    madeNewUser: ({commit, dispatch}, newUser) => {
       return new Promise((resolve, reject) => {
-        commit('ADD_PICTURE', picture, orderId);  
+        commit('NEW_USER', newUser);
+      })
+    },
+    addPicture: ({commit, dispatch}, picture, ReportId) => {
+      return new Promise((resolve, reject) => {
+        commit('ADD_PICTURE', picture, ReportId);
       });
     }
   },
   mutations: {
-    NEW_ORDER_DATA(state, orders) {
-          state.orders.push(orders[orderId]);
+    NEW_Report_DATA(state, reports) {
+          state.reports.push(reports[ReportId]);
         },
-    NEW_ORDER(state, newOrder) {
-      state.orders.push(newOrder);
+    NEW_Report(state, newReport) {
+      state.reports.push(newReport);
       },
-    ADD_PICTURE(state, picture, orderId) {
-      state.orders[this.orderId].pictures.push(picture);
+    NEW_USER(state, newUser) {
+      state.users.push(newUser);
+      },
+    ADD_PICTURE(state, picture, ReportId) {
+      state.reports[this.ReportId].pictures.push(picture);
       }
     },
   getters: {
-    orders:state => state.orders,
+    reports:state => state.reports,
     allUsers: state => state.users,
 
   },

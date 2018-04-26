@@ -2,37 +2,37 @@
     <div class="full-screen">
         <div class="style-form">
             <h2>Исполнитель {{name}} <router-link to="/"><button  class="exit">Выход</button></router-link></h2>
-            <div class="madeOrder">
-                <made-order :idOrder=idOrder :orders="newOrder" />
+            <div class="madeReport">
+                <made-Report :name="name" :idReport=idReport :reports="newReport" />
             </div>
-            <div class="orders">
-                <orders :new-order="orders"></orders>
+            <div class="reports">
+                <reports :userId=this.$route.params.id :new-Report="reports"></reports>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import MadeOrder from "./layouts/MadeOrder";
-import Orders from "./layouts/Orders";
+import MadeReport from "./layouts/MadeReport";
+import Reports from "./layouts/Reports";
 import { mapGetters } from "vuex";
 
 export default {
   name: "Worker",
   components: {
-    MadeOrder,
-    Orders
+    MadeReport,
+    Reports
   },
   data() {
     return {
-      newOrder: {},
+      newReport: {},
       name: localStorage.getItem("name"),
     };
   },
   computed: {
-    ...mapGetters(["orders"]),
-    idOrder: function() {
-        return this.orders.length;
+    ...mapGetters(["reports"]),
+    idReport: function() {
+        return this.reports.length;
     }
   },
 };
@@ -56,7 +56,7 @@ body {
     text-shadow: 0 3px 1px rgba(0, 0, 0, 0.5);
 }
 
-.orders {
+.reports {
     margin: 30px;
 }
 

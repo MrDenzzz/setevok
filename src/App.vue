@@ -16,7 +16,7 @@ button {
     background-color: #506371;
     border: dashed 2px black;
     font-size: 16pt;
-    
+
 }
 
 button:hover {

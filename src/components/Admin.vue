@@ -1,19 +1,19 @@
 <template>
     <div>
         <h2>Администратор {{name}}</h2>
-            <div class="orders">
-                <Orders></Orders>
+            <div class="reports">
+                <reports></reports>
             </div>
     </div>
 </template>
 
 <script>
-import Orders from "./layouts/Orders";
+import Reports from "./layouts/Reports";
 
 export default {
   name: "Admin",
   components: {
-    Orders
+    Reports
   },
   data() {
     return {
@@ -24,7 +24,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.orders {
+.reports {
     width: 90%;
     margin-left: 5%;
     margin-right: 5%;

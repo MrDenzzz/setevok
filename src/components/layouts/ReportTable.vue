@@ -1,8 +1,8 @@
 <template>
-    <div class="madeOrder">
+    <div class="madeReport">
         <div class="date">
             <label for="p">Дата конца проверки</label>
-            <p>{{order.date}}</p>
+            <p>{{Report.date}}</p>
         </div>
         <div class="date">
             <label for="p">Город</label>
@@ -10,29 +10,29 @@
         </div>
         <div class="date">
             <label for="p">Кинотеатр</label>
-            <p>{{order.cinema}}</p>
+            <p>{{Report.cinema}}</p>
         </div>
         <div class="date">
             <label for="p">Исполнитель</label>
-            <p>{{order.name}}</p>
+            <p>{{Report.name}}</p>
         </div>
         <div class="date">
             <label for="p">Вид проверки</label>
-            <p>{{order.kind}}</p>
+            <p>{{Report.kind}}</p>
         </div>
         <div class="date">
             <label for="p">Тип проверки</label>
-            <p>{{order.type}}</p>
-        </div> 
-        <router-link to="/reclameOrder"><button type="submit">Обновить отчет</button></router-link>
+            <p>{{Report.type}}</p>
+        </div>
+        <router-link to="/reclameReport"><button type="submit">Обновить отчет</button></router-link>
     </div>
 </template>
 
 <script>
 export default {
-  name: "order",
+  name: "Report",
   props: {
-      order: {
+      Report: {
         type: Object,
         required: true
       }
@@ -51,7 +51,7 @@ button{
     font-size: 16pt;
     color white
 }
-.madeOrder:hover
+.madeReport:hover
     transition .5s
     background: rgba(50, 255, 50, 0.2)
 

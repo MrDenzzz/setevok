@@ -1,9 +1,9 @@
 <template>
     <div>
-        <!-- <form class="madeOrder"> -->
-        <div class="madeOrder">
+        <!-- <form class="madeReport"> -->
+        <div class="madeReport">
         <div class="date">
-            <label for="p">Дата проверки</label><p>{{today}}</p> <p>{{newOrder.date}}</p>
+            <label for="p">Дата проверки</label><p>{{today}}</p> <p>{{newReport.date}}</p>
         </div>
         <div class="date">
             <label for="p">Исполнитель</label><p>{{name}}</p>
@@ -12,7 +12,7 @@
             <label for="p">Город</label><p>{{city}}</p>
         </div>
         <div class="date">
-            <label for="p">Кинотеатр</label><p><select  v-model="newOrder.cinema" name="cinema" required> 
+            <label for="p">Кинотеатр</label><p><select  v-model="newReport.cinema" name="cinema" required>
                                             <option selected disabled>Выберите кинотеатр</option>
                                             <option >111111111</option>
                                             <option >11111111</option>
@@ -20,15 +20,15 @@
         </div>
         <div class="date">
             <label for="p">Вид проверки</label>
-                <p>Реклама<input v-model="newOrder.kind" name="kind" value="Реклама" type="radio" required></p>
-                <p>Сеансы<input v-model="newOrder.kind" name="kind" value="Сеансы" type="radio" required></p>
+                <p>Реклама<input v-model="newReport.kind" name="kind" value="Реклама" type="radio" required></p>
+                <p>Сеансы<input v-model="newReport.kind" name="kind" value="Сеансы" type="radio" required></p>
         </div>
         <div class="date">
             <label for="p">Тип проверки</label>
-                <p>Скрытая<input v-model="newOrder.type" name="type" value="Скрытая" type="radio" required></p>
-                <p>Открытая<input v-model="newOrder.type" name="type" value="Открытая" type="radio" required></p>
+                <p>Скрытая<input v-model="newReport.type" name="type" value="Скрытая" type="radio" required></p>
+                <p>Открытая<input v-model="newReport.type" name="type" value="Открытая" type="radio" required></p>
         </div>
-        <button @click="madeOrder(newOrder)">Создать проверку</button> 
+        <button @click="madeReport(newReport)">Создать проверку</button>
         <!-- </form> -->
         </div>
     </div>
@@ -38,20 +38,20 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "made-order",
+  name: "made-Report",
   data() {
     return {
       name: localStorage.getItem("name"),
       city: localStorage.getItem("city"),
 
-      newOrder: {
-        id: this.$parent.idOrder,
+      newReport: {
+        id: this.$parent.idReport,
         date: "2014-23-02",
-        city: "city",
+        city: this.$parent.name,
         cinema: "Выберите кинотеатр",
         kind: "",
         type: "",
-        name: "Олег",
+        name: this.$parent.name,
 
         siti: [],
         hard: [],
@@ -83,7 +83,7 @@ export default {
         this.stableDate(todayDate.getDay())
       );
     },
-    ...mapGetters(["orders"])
+    ...mapGetters(["reports"])
   },
   methods: {
     stableDate(normalizeDate) {
@@ -92,26 +92,26 @@ export default {
       }
       return normalizeDate;
     },
-    madeOrder(newOrder) {
+    madeReport(newReport) {
       if (
-        !newOrder.kind ||
-        !newOrder.type ||
-        newOrder.cinema === "Выберите кинотеатр"
+        !newReport.kind ||
+        !newReport.type ||
+        newReport.cinema === "Выберите кинотеатр"
       ) {
         return false;
       } else {
-        console.log(this.newOrder, "djn")
-        this.$emit("newOrder", this.newOrder);
+        console.log(this.newReport, "djn")
+        this.$emit("newReport", this.newReport);
         this.$store
-          .dispatch("madeNewOrder", this.newOrder)
+          .dispatch("madeNewReport", this.newReport)
           .then(() => {
-            console.log("Success order data request");
+            console.log("Success Report data request");
           })
           .catch(() => {
-            console.log("Error order data request");
+            console.log("Error Report data request");
           });
         return;
-        return console.log(this.orders);
+        return console.log(this.reports);
       }
     }
   }
@@ -119,7 +119,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.madeOrder {
+.madeReport {
     background: linear-gradient(to top, #506371, #405361);
     border: inset 1px #405361;
     border-radius: 5px;
@@ -130,12 +130,12 @@ export default {
     transition: 0.3s;
 }
 
-.madeOrder:hover {
+.madeReport:hover {
     background-color: rgba(50, 255, 50, 0.2);
 }
 
 @media (max-width: 800px) {
-    .madeOrder {
+    .madeReport {
         flex-direction: column;
         align-self: center;
     }

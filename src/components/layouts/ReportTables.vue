@@ -1,28 +1,28 @@
 <template>
     <div>
-        <order 
-            class="madeOrder"
-            v-for="item in orders"
-            :key="item.id" 
-            :order="item"/>
+        <report
+            class="madeReport"
+            v-for="item in reports"
+            :key="item.id"
+            :report="item"/>
     </div>
 </template>
 <script>
-import Order from "./Order";
+import Report from "./Report";
 import { mapGetters } from 'vuex';
 
 export default {
   components: {
-    Order
+    Report
   },
   methods: {
 
   },
-  computed: mapGetters({orders: "allOrders", OrderDates: "OrderDates"})
+  computed: mapGetters({reports: "allReport", ReportDates: "ReportDates"})
   }
 </script>
 <style lang="stylus" scoped>
-.madeOrder {
+.madeReport {
     background: linear-gradient(to top, #506371, #405361);
     border: inset 1px #405361;
     border-radius: 5px;
@@ -33,7 +33,7 @@ export default {
 }
 
 @media (max-width: 800px) {
-    .madeOrder {
+    .madeReport {
         flex-direction: column;
         align-self: center;
     }

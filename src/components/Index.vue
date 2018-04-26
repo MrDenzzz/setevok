@@ -1,7 +1,7 @@
 <template>
 <div class="full-screen">
 <div class="style-form">
-    
+
     <h1>Авторизация</h1>
     <form @submit.prevent="checker(check)">
         <div>
@@ -32,8 +32,8 @@
         </div>
     </form>
     <div>
-        У Вас нет аккаута? 
-        <router-link to="/registration"><button type="button">БИСТРА ПАШЕЛ РИГИСТРИРОВАЦЦА ПАДОНАК!11111</button></router-link>
+        У Вас нет аккаута?
+        <router-link to="/registration"><button type="button">Регистрация</button></router-link>
     </div>
 </div>
 </div>
@@ -64,16 +64,33 @@ export default {
           this.check = false;
           localStorage.setItem("userId",this.users[i].userId);
           localStorage.setItem("city",this.users[i].city);
-          localStorage.setItem("name",this.users[i].name);          
+          localStorage.setItem("name",this.users[i].name);
           this.$router.push({
             path:
-              this.users[i].path
+              this.users[i].path + `/${this.users[i].userId}`,
+              params:{
+              userId: this.users[i].userId
+              }
+            //   this.users[i].path
           });
         } else {
           console.log(this.users[i].pass);
           this.check = true;
         }
       }
+    },
+    madeWorker() {
+      console.log(this.zxc);
+      return;
+      this.newUser.userId++;
+      this.users.push(this.newUser);
+      this.$router.push({
+        path:
+          this.newUser.path + `/${this.users[i].userId}`,
+        params: {
+          id: this.users[i].userId,
+        }
+      });
     },
     show() {
       this.$modal.show(

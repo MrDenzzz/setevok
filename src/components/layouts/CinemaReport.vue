@@ -1,23 +1,32 @@
 <template>
     <div class="style-form">
-        <form @submit.prevent="orderFilled()">
-        <div @submit.prevent="orderFilled()" class="calendar">
+        <form @submit.prevent="ReportFilled()">
+        <div @submit.prevent="ReportFilled()" class="calendar">
             <label for=""> Дата проверки
-                <datepicker :format="customFormatter(this.orders[orderId].date)" v-model="orders[orderId].date" language="ru"></datepicker>
+                <datepicker :format="customFormatter(this.reports[ReportId].date)" v-model="reports[ReportId].date" language="ru"></datepicker>
             </label>
         </div>
-        <label class="ordersDetales" for="input">Плакаты<input v-model="orders[orderId].poster[0]" type="text"/><input v-model="orders[orderId].poster[1]" type="checkbox"/><p>Обещали повесить</p></label>
-        <label class="ordersDetales" for="input">Сити-постеры<input v-model="orders[orderId].siti[0]" type="text"/><input v-model="orders[orderId].siti[1]" type="checkbox"/><p>Обещали повесить</p></label>
-        <label class="ordersDetales" for="input">Хард-постеры<input v-model="orders[orderId].hard[0]" type="text"/><input v-model="orders[orderId].hard[1]" type="checkbox"/><p>Обещали повесить</p></label>
-        <label class="ordersDetales" for="input">Флаеры<input v-model="orders[orderId].flaers[0]" type="text"/><input v-model="orders[orderId].flaers[1]" type="checkbox"/><p>Обещали повесить</p></label>
-        <label class="ordersDetales" for="input">Стенди-постеры <input v-model="orders[orderId].stand[0]" type="text"/><input v-model="orders[orderId].stand[1]" type="checkbox"/><p>Обещали повесить</p></label>
-        <label class="ordersDetales" for="input">Фото-отчеты
+          <label class="reportsDetales" for="input">Время</label>
+          <input onclick="this.select();" v-model="reports[ReportId].time" type="text"/>
+          <label class="reportsDetales" for="input">Количество сеансов в этот день</label>
+          <input onclick="this.select();" v-model="reports[ReportId].sessions" type="text"/>
+          <label class="reportsDetales" for="input">Количество зрителей</label>
+          <input onclick="this.select();" v-model="reports[ReportId].people" type="text"/>
+          <label class="reportsDetales" for="input">Цена билета</label>
+          <input onclick="this.select();" v-model="reports[ReportId].cost" type="text"/>
+          <label class="reportsDetales" for="input">Зал </label>
+          <input onclick="this.select();" v-model="reports[ReportId].hall" type="text"/>
+          <label class="reportsDetales" for="input">Ряд </label>
+          <input onclick="this.select();" v-model="reports[ReportId].row" type="text"/>
+          <label class="reportsDetales" for="input">Место </label>
+          <input onclick="this.select();" v-model="reports[ReportId].seat" type="text"/>
+          <label class="reportsDetales" for="input">Фото-отчеты</label>
             <vue-clip :options="options">
-                
+
                 <template slot="clip-uploader-action">
                     <div class="uploader-action">
                         <div @click="addPicture(file.dataUrl)" class="dz-message">
-                            <i class="fa fa-upload"></i> Бросьте сюда файлы
+                            <i class="fa fa-upload"></i> <button>Добавтить фото</button>
                         </div>
                     </div>
                 </template>
@@ -26,8 +35,8 @@
                      <div class="uploader-files">
                          <div class="uploader-file" v-for="file in props.files">
                              <div class="file-avatar">
-                                 <img  
-                                       :src="file.dataUrl" alt=""> 
+                                 <img
+                                       :src="file.dataUrl" alt="">
                                        <!-- Отсюда как-то надо достать file.dataUrl -->
                              </div>
                              {{ file.name }}
@@ -38,11 +47,11 @@
                         {{ file.name }} {{ file.status }}
                     </div>
                 </template>
-            
+
             </vue-clip>
-        </label>
         <button type="submit">Upload</button>
         </form>
+      <router-link to="/worker/userId"><button>Отчеты</button></router-link>
     </div>
 </template>
 
@@ -52,13 +61,13 @@ import Moment from 'moment';
 import { mapGetters } from "vuex";
 
 export default {
-  name: "ReclameOrder",
+  name: "cinemaReport",
   components: {
     Datepicker
   },
   data() {
     return {
-      orderId: this.$route.params.id,
+      ReportId: this.$route.params.id,
       file: "",
       sejectedFile: null,
       options: {
@@ -67,52 +76,52 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["orders"])
+    ...mapGetters(["reports"]),
   },
   methods: {
     onFileSelected(event) {
       selectedFile = event.target.files[0];
     },
     customFormatter(date) {
-    this.orders[this.orderId].date = Moment(date).format("YYYY-MM-DD");
+    this.reports[this.ReportId].date = Moment(date).format("YYYY-MM-DD");
       return Moment(date).format("YYYY-MM-DD");
     },
     addPicture(picture) {
       console.log(this.picture, "this.picture");
       this.$store
-            .dispatch("addPicture", this.file.dataUrl, this.orderId)
+            .dispatch("addPicture", this.file.dataUrl, this.ReportId)
             .then(() => {
-              console.log("Success order data request");
+              console.log("Success Report data request");
             })
             .catch(() => {
-              console.log("Error order data request", file.dataUrl, this.orderId);
+              console.log("Error Report data request", file.dataUrl, this.ReportId);
             });
-      console.log(this.orders[this.orderId].pictures, "this.pictures");
+      console.log(this.reports[this.ReportId].pictures, "this.pictures");
     },
-    orderFilled() {
-      for (let i = 0; i > this.orders[this.orders.lenght]; i++) {
-        if (this.orders[i] === false) {
-          this.orders.filled = true;
-          console.log(this.orders, "orderFilled true");
+    ReportFilled() {
+      for (let i = 0; i > this.reports[this.reports.lenght]; i++) {
+        if (this.reports[i] === false) {
+          this.reports.filled = true;
+          console.log(this.reports, "ReportFilled true");
           this.$store
-            .dispatch("ordersRequest", this.orders)
+            .dispatch("reportsRequest", this.reports)
             .then(() => {
-              console.log("Success order data request");
+              console.log("Success Report data request");
             })
             .catch(() => {
-              console.log("Error order data request");
+              console.log("Error Report data request");
             });
           return;
         } else {
-          this.orders.filled = false;
-          console.log(this.orders, "orderFilled false");
+          this.reports.filled = false;
+          console.log(this.reports, "ReportFilled false");
           this.$store
-            .dispatch("ordersRequest", this.orders)
+            .dispatch("reportsRequest", this.reports)
             .then(() => {
-              console.log("Success order data request");
+              console.log("Success Report data request");
             })
             .catch(() => {
-              console.log("Error order data request");
+              console.log("Error Report data request");
             });
         }
       }
@@ -124,13 +133,11 @@ export default {
 <style lang="stylus" scoped>
 .style-form
     display flex
-    flex-direction: column;
-    width 400px
 
-.ordersDetales {
+.reportsDetales {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: baseline;
 }
 
@@ -140,7 +147,6 @@ export default {
 
 
 .style-form input[type=text] {
-    width: 30%;
     display: flex;
     padding: 8px 4px 8px 10px;
     margin-bottom: 15px;

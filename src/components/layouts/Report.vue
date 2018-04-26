@@ -1,32 +1,32 @@
 <template>
-        <!-- <form class="madeOrder"> -->
-        <div class="madeOrder">
+        <!-- <form class="madeReport"> -->
+        <div class="madeReport">
         <div class="date">
             <label for="p">Дата конца проверки</label>
-            <p>{{order.date}}</p>
+            <p>{{report.date}}</p>
         </div>
         <div class="date">
             <label for="p">Город</label>
-            <p>{{order.city}}</p>
+            <p>{{report.city}}</p>
         </div>
         <div class="date">
             <label for="p">Кинотеатр</label>
-            <p>{{order.cinema}}</p>
+            <p>{{report.cinema}}</p>
         </div>
         <div class="date">
             <label for="p">Исполнитель</label>
-            <p>{{order.name}}</p>
+            <p>{{report.name}}</p>
         </div>
         <div class="date">
             <label for="p">Вид проверки</label>
-            <p>{{order.kind}}</p>
+            <p>{{report.kind}}</p>
         </div>
         <div class="date">
             <label for="p">Тип проверки</label>
-            <p>{{order.type}}</p>
-        </div> 
+            <p>{{report.type}}</p>
+        </div>
         <div class="date">
-            <button @click="changeOrder(order.id)" type="submit">Обновить отчет</button>            
+            <button @click="changeReport(report.id)" type="submit">Обновить отчет</button>
         </div>
         </div>
         <!-- </form> -->
@@ -34,28 +34,28 @@
 
 <script>
 export default {
-  name: "order",
+  name: "report",
   props: {
-    order: {
+    report: {
       type: Object,
       required: true
     }
   },
   methods: {
-    changeOrder: function(id) {
+    changeReport: function(id) {
       console.log(id);
-      if (this.order.kind === "Реклама") {
+      if (this.report.kind === "Реклама") {
         this.$router.push({
-          path: (this.order.path = "/reclameorder" + `/${id}`),
+          path: (this.report.path = "/reclamereport" + `/${id}`),
           params: {
-            id: this.order.id
+            id: this.report.id
           }
         });
       } else {
         this.$router.push({
-          path: (this.order.path = "/cinemaorder" + `/${id}`),
+          path: (this.report.path = "/cinemareport" + `/${id}`),
           params: {
-            id: this.order.id
+            id: this.report.id
           }
         });
       }
@@ -65,7 +65,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.madeOrder {
+.madeReport {
     background: linear-gradient(to top, #506371, #405361);
     border: inset 1px #405361;
     border-radius: 5px;
@@ -95,7 +95,7 @@ button {
     color: white;
 }
 
-.madeOrder:hover {
+.madeReport:hover {
     transition: 0.5s;
     background: rgba(50, 255, 50, 0.2);
 }
