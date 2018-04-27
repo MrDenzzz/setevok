@@ -25,11 +25,5 @@ export default {
 </script>
 <style lang="stylus" scoped>
 
-@media (max-width: 800px) {
-    .madeReport {
-        flex-direction: column;
-        align-self: center;
-    }
-}
 
 </style>

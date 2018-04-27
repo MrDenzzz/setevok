@@ -1,9 +1,9 @@
 <template>
     <div class="modal">
         <div class="check-mail">
-            
+
             <p class="modal-access">Вам на почту было отправлено письмо с подтверждением</p>
-            
+
             <a href="https://myaccount.google.com/">
                 <icon name="google"></icon>
             </a>
@@ -28,7 +28,7 @@ export default {
       type: Object,
       reguired: true
     }
- 
+
   },
   computed: mapGetters({ users: "allUsers" }),
   methods: {
@@ -50,15 +50,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-
-.modal
-  width 100%
-  height 100%;
-
-
-.check-mail
-  width 300px
-  height 300px;
 
 
 </style>

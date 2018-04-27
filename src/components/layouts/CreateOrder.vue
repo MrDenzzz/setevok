@@ -1,5 +1,6 @@
 <template>
   <div>
+    <label for="createorder">Создание заказа</label>
     <form @submit.prevent="madeOrder(newOrder)" class="madeOrder">
       <input v-model="newOrder.film" type="text" placeholder="Название заказа">
       <div>
@@ -93,39 +94,4 @@
 
 <style lang="stylus" scoped>
 
-
-  .reports {
-    width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
-  }
-  a, li {
-    text-decoration none
-    list-style-type: none;
-    display flex
-    flex-direction row
-    justify-content space-between
-    width 400px
-  }
-  li{
-    background-color darkgray
-    border-radius 15px
-    margin-top 15px
-    transition 1s
-  }
-  li:hover
-    background-color wheat
-  p{
-    margin-left 10px
-    margin-right 10px
-    width 100%
-    text-align center
-    color black
-  }
-  .madeOrder
-    display flex
-    justify-content space-between
-    text-align center
-    width 33vw
-    min-width 600px
 </style>

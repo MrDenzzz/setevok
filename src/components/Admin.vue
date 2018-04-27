@@ -4,8 +4,10 @@
         <router-link to="/">
           <button class="exit">Выход</button>
         </router-link></h2>
-      <createorder class="orderBlock"></createorder>
-      <checkorder class="orderBlock"></checkorder>
+      <div class="orderBlocks">
+        <createorder></createorder>
+        <checkorder></checkorder>
+      </div>
     </div>
 </template>
 
@@ -29,14 +31,5 @@
 </script>
 
 <style lang="stylus" scoped>
-  .orderBlock{
-    width 50%
-  }
-  .exit {
-    background-color: rgba(50, 255, 50, 0.2);
-    color: white;
-    border-color: white;
-  }
-
 
 </style>

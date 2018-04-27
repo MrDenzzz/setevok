@@ -69,51 +69,5 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-.madeReport {
-    background: linear-gradient(to top, #506371, #405361);
-    border: inset 1px #405361;
-    border-radius: 5px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    transition: 0.3s;
-}
 
-.date {
-    // display flex
-    // justify-content center
-    // flex-direction column
-    // align-items center
-    padding: 10px;
-}
-
-button {
-    width: 100%;
-    height: 100%;
-    border-radius: 5px;
-    background-color: #506371;
-    border: dashed 2px rgba(0, 0, 0, 0.4);
-    transition: 0.2s;
-    font-size: 16pt;
-    color: white;
-}
-
-.madeReport:hover {
-    transition: 0.5s;
-    background: rgba(50, 255, 50, 0.2);
-}
-
-button:hover {
-    background-color: #405361;
-}
-
-button:active {
-    background-color: rgba(50, 255, 50, 0.2);
-    border-color: white;
-}
-
-.date {
-    padding: 7px;
-}
 </style>
