@@ -8,12 +8,14 @@ import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon'
 import VModal from 'vue-js-modal'
 import VueClip from "vue-clip";
+import XLSX from 'xlsx';
 
 
 import {store} from './store.js'
 
 Vue.use(VModal);
 Vue.use(VueClip);
+Vue.use(XLSX);
 
 
 
@@ -33,5 +35,5 @@ new Vue({
   store,
   components: { App },
   template: '<App/>'
-  
+
 })

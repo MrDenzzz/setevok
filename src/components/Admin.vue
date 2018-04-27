@@ -22,7 +22,7 @@
         <li v-for="order in orders"
             :key = order.orderId
             :order="order">
-            <a href="#">
+            <a :order="order" @click="getOrderTable(order.orderId)" >
              <p>
                {{ order.film }}
              </p>
@@ -82,6 +82,14 @@ export default {
           });
         return;
       }
+    },
+    getOrderTable(id){
+      this.$router.push({
+        path:  "/table" + `/${id}`,
+        params: {
+          id: id
+        }
+      });
     }
   },
 };
