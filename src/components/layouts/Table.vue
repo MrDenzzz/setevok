@@ -8,7 +8,8 @@
           <input type="file" class="form-control" id="file" :accept="SheetJSFT" @change="_change" />
         </div>
       </form>
-    </div></div>
+    </div>
+    </div>
     <div class="row"><div class="col-xs-12">
       <button :disabled="data.length ? false : true" class="btn btn-success" @click="_export">Export</button>
     </div></div>

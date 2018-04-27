@@ -1,98 +1,23 @@
 <template>
     <div>
-        <h2>Администратор {{ name }}
-          <router-link to="/">
+      <h2>Администратор {{ name }}
+        <router-link to="/">
           <button  class="exit">Выход</button>
         </router-link></h2>
-      <form @submit.prevent="madeOrder(newOrder)" class="madeOrder">
-        <input v-model="newOrder.film" type="text" placeholder="Название заказа">
-        <div>
-        <label for="p">Вид проверки</label>
-        <p>Реклама<input v-model="newOrder.kind" name="kind" value="Реклама" type="radio" required></p>
-        <p>Сеансы<input v-model="newOrder.kind" name="kind" value="Сеансы" type="radio" required></p>
-        </div>
-        <div>
-          <label for="p">Тип проверки</label>
-          <p>Скрытая<input v-model="newOrder.type" name="type" value="Скрытая" type="radio" required></p>
-          <p>Открытая<input v-model="newOrder.type" name="type" value="Открытая" type="radio" required></p>
-        </div>
-        <button type="submit" >Создать заказ</button>
-      </form>
-      <ul>
-        <li v-for="order in orders"
-            :key = order.orderId
-            :order="order">
-            <a :order="order" @click="getOrderTable(order.orderId)" >
-             <p>
-               {{ order.film }}
-             </p>
-          <p>
-            {{ order.type}}
-          </p>
-          <p>
-            {{ order.kind}}
-          </p>
-            </a>
-        </li>
-      </ul>
+      <createorder></createorder>
     </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+  import CreateOrder from './layout/CreateOrder';
+  import { mapGetters } from "vuex";
 
-
-export default {
-  name: "Admin",
-  components: {
-
-  },
-  data() {
-    return {
-      name: localStorage.getItem("name"),
-      newOrder:{
-        id: 3,
-        film: '',
-        type: '',
-        kind: ''
-      }
-    };
-  },
-  computed: {
-    ...mapGetters(["orders"]),
-  },
-  methods: {
-    madeOrder(newOrder) {
-      if (
-        !newOrder.kind ||
-        !newOrder.type ||
-        !newOrder.film
-      ) {
-        return false;
-      } else {
-        console.log(this.newOrder, "djn")
-        this.$emit("newOrder", this.newOrder);
-        this.$store
-          .dispatch("madeNewOrder", this.newOrder)
-          .then(() => {
-            console.log("Success Order data request");
-          })
-          .catch(() => {
-            console.log("Error Order data request");
-          });
-        return;
-      }
+  export default {
+    name:"Admin",
+    components: {
+      CreateOrder
     },
-    getOrderTable(id){
-      this.$router.push({
-        path:  "/table" + `/${id}`,
-        params: {
-          id: id
-        }
-      });
-    }
-  },
-};
+  }
 </script>
 
 <style lang="stylus" scoped>
