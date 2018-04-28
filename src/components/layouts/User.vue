@@ -4,10 +4,10 @@
       <div class="form">
         <label for="" class="red-label">Заказы исполнителя</label>
         <ul>
-          <li v-for="report in reports"
-              :key = report.userId
+          <li v-for="(report, index) in reports"
+              :key = index
               :report="report">
-            <a :report="report" @click="changeReport(report.userId)" >
+            <a :report="report" @click="selectedReport = report" >
 
               <p>
                 {{ report.date }}
@@ -32,11 +32,11 @@
         </ul>
       </div>
       <div class="form">
-        <!--<label>{{ user.name }}</label>-->
-        <!--<p>{{ user.city }}</p>-->
-        <!--<p>{{ user.mail }}</p>-->
-        <!--<p>{{ user.path }}</p>-->
-        Не отображается инфа по пользователю
+        <label>{{ user.name }}</label>
+        <p>{{ user.city }}</p>
+        <p>{{ user.mail }}</p>
+        <p>{{ user.path }}</p>
+        Теперь отображается :)
         <button>Изменить</button>
         <button>Удалить</button>
 
@@ -47,6 +47,7 @@
     </div>
     <div class="form userReport">
       <label for="p" class="reg-label"><p>Выбранный отчет</p></label>
+      <pre v-if="selectedReport !== null">{{selectedReport}}</pre>
     </div>
   </div>
 </template>
@@ -58,39 +59,44 @@
         name: "User",
     data() {
       return {
-        id: this.$route.params.id
+        id: this.$route.params.userId,
+        selectedReport: null
       }
     },
     computed: {
       ...mapGetters(["allUsers", "reports"]),
-      // user: this.users.filter(function (userId) {
-      //       console.log(userId, "1");
-      //       console.log(this.id, "2");
-      //       return userId === this.id;
-      //   }),
+      user: function () {
+        let result = this.allUsers.find(item => {
+            return item.userId == this.id;
+        })
+        return result;
+      },
     },
     methods: {
       changeReport: function (id) {
         console.log(id);
         // this.$emit('report', this.report);
-        if (this.report.kind === "Реклама") {
+        if (this.reports.kind === "Реклама") {
           this.$router.push({
-            path: (this.report.path = "/reclamereport" + `/${id}`),
+            path: (this.reports.path = "/reclamereport" + `/${id}`),
             params: {
-              id: this.report.id
+              id: this.reports.id
             }
           });
         } else {
           this.$router.push({
-            path: (this.report.path = "/cinemareport" + `/${id}`),
+            path: (this.reports.path = "/cinemareport" + `/${id}`),
             params: {
-              id: this.report.id
+              id: this.reports.id
             }
           });
         }
       },
+    },
+    created () {
+      console.log(this)
     }
-    }
+  }
 </script>
 
 <style lang="stylus" scoped>
