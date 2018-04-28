@@ -2,8 +2,8 @@
     <div>
       <label for="div">Рассылка заданий</label>
       <div class="filter">
-        <input type="text" placeholder="Написать Заказ">
-        <input type="text" placeholder="Написать Города">
+        <input type="text" placeholder="Select Заказ">
+        <input type="text" placeholder="Select git addГорода">
       </div>
       <textarea placeholder="текст сообщения" name="" id="" cols="30" rows="10"></textarea>
       <div class="dist-button">
