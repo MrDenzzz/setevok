@@ -5,6 +5,7 @@ import Worker from '@/components/Worker'
 import Admin from '@/components/Admin'
 import ReclameReport from '@/components/layouts/ReclameReport'
 import CinemaReport from '@/components/layouts/CinemaReport'
+import User from '@/components/layouts/User'
 import Order from '@/components/layouts/Order'
 import Table from '@/components/layouts/Table'
 import Registration from '@/components/Registration'
@@ -27,6 +28,11 @@ export default new Router({
       path: '/order/:userId',
       name: 'Order',
       component: Order
+    },
+    {
+      path: '/user/:userId',
+      name: 'User',
+      component: User
     },
     {
       path: '/admin/:userId',

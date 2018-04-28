@@ -1,17 +1,17 @@
 <template>
   <div>
-    <label for="createorder">Создание заказа</label>
-    <form @submit.prevent="madeOrder(newOrder)" class="madeOrder">
-      <input v-model="newOrder.film" type="text" placeholder="Название заказа">
+    <label for="form">Создание заказа</label>
+    <form  @submit.prevent="madeOrder(newOrder)" class="madeOrder form">
+      <input v-model="newOrder.film" type="text" placeholder="Введите название заказа">
       <div>
         <label for="p">Вид проверки</label>
-        <p>Реклама<input v-model="newOrder.kind" name="kind" value="Реклама" type="radio" required></p>
-        <p>Сеансы<input v-model="newOrder.kind" name="kind" value="Сеансы" type="radio" required></p>
+        <p>Реклама<input class="option-input radio" v-model="newOrder.kind" name="kind" value="Реклама" type="radio" required></p>
+        <p>Сеансы<input class="option-input radio" v-model="newOrder.kind" name="kind" value="Сеансы" type="radio" required></p>
       </div>
       <div>
         <label for="p">Тип проверки</label>
-        <p>Скрытая<input v-model="newOrder.type" name="type" value="Скрытая" type="radio" required></p>
-        <p>Открытая<input v-model="newOrder.type" name="type" value="Открытая" type="radio" required></p>
+        <p>Скрытая<input class="option-input radio" v-model="newOrder.type" name="type" value="Скрытая" type="radio" required></p>
+        <p>Открытая<input class="option-input radio" v-model="newOrder.type" name="type" value="Открытая" type="radio" required></p>
       </div>
       <button type="submit" >Создать заказ</button>
     </form>
@@ -93,5 +93,36 @@
 </script>
 
 <style lang="stylus" scoped>
+
+.madeOrder{
+  display flex
+  flex-direction row
+  justify-content space-between
+  width auto
+}
+input[type="text"]
+  border none
+  outline-color rgba(255, 255, 255, 0)
+ul
+  display flex
+  flex-direction column
+  justify-content space-around
+  padding-left 0px
+
+li
+  background-color rgba(0, 0, 0, 0.06)
+  margin 10px
+  flex-direction row
+  border-radius 15px
+  transition .3s
+li:hover
+  background-color rgba(0, 0, 0, 0.08)
+  transition .3s
+
+a
+  display flex
+  flex-direction row
+  justify-content space-around
+
 
 </style>

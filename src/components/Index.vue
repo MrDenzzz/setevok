@@ -1,42 +1,42 @@
 <template>
-<div class="full-screen">
-<div class="style-form">
-
-    <h1>Авторизация</h1>
+  <div class="screen">
+  <div class="form">
+    <div>
+    <h1 class="title">Авторизация</h1>
     <form @submit.prevent="checker(check)">
-        <div>
+        <div class="input">
             <label for="login">Email</label>
-            <input v-model="login" type="text"  placeholder="Email" required>
+            <input v-model="login" type="text"  placeholder="Введите Email" required>
         </div>
-        <div>
+        <div class="input">
             <label for="password">Пароль</label>
-            <input type="password" v-model="password"  placeholder="Пароль" required><!--minlength="8"-->
+            <input type="password" v-model="password"  placeholder="Введите Пароль" required><!--minlength="8"-->
         </div>
         <p v-if="check">Неверная Почта или Пароль</p>
         <div>
             <span>
                 {{users[0].mail}}
-            </span>
+            </span><br>
             <span>
                 {{users[0].pass}}
-            </span>
-            <span>
+            </span><br>
+            <span><br>
                 {{users[1].mail}}
-            </span>
+            </span><br>
             <span>
                 {{users[1].pass}}
-            </span>
+            </span><br>
         </div>
-        <div>
-            <button type="submit">Войти</button>
+        <div class="login">
+            <button  type="submit">Войти</button>
         </div>
     </form>
-    <div>
-        У Вас нет аккаута?
-        <router-link to="/registration"><button type="button">Регистрация</button></router-link>
+    <div class="reg-block">
+        <router-link class="reg-link" to="/registration">У вас нет аккаунта? Регистрация </router-link>
     </div>
 </div>
-</div>
+  </div>
+  </div>
 </template>
 
 <script>
@@ -108,5 +108,42 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+
+
+  .input
+    display flex
+    justify-content space-between
+    margin  10px 0 10px 10px
+    border rgba(0, 0, 0, 0.23) solid 1px
+    border-radius 5px
+  label
+    margin 10px
+    width 15%
+  input
+    margin-left 10px
+    border none
+    outline-color rgba(255, 255, 255, 0)
+    width 100%
+  input:focus
+    outline-color none
+  .login
+    display flex
+    justify-content center
+  .reg-b
+    width 100%
+    display flex
+    justify-content flex-end
+  .reg-block
+    width: 100%
+    display flex
+    justify-content flex-end
+    margin-top 5px
+  .reg-link
+    text-decoration none
+    border none
+    color rgba(0,0,0,0.71)
+  .login
+    justify-content flex-end
+
 
 </style>

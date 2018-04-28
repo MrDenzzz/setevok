@@ -1,6 +1,7 @@
 <template>
         <!-- <form class="madeReport"> -->
-        <div class="madeReport">
+        <div class="form report">
+         <div class="size-4">
         <div class="date">
             <label for="p">Дата конца проверки</label>
             <p>{{report.date}}</p>
@@ -17,7 +18,9 @@
             <label for="p">Кинотеатр</label>
             <p>{{report.film}}</p>
           </div>
-        <div class="date">
+         </div>
+          <div class="size-4">
+          <div class="date">
             <label for="p">Исполнитель</label>
             <p>{{report.name}}</p>
         </div>
@@ -32,6 +35,7 @@
         <div class="date">
             <button @click="changeReport(report.id)" type="submit">Обновить отчет</button>
         </div>
+          </div>
         </div>
         <!-- </form> -->
 </template>
@@ -69,5 +73,25 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+.form
+  width auto
+  box-shadow none
+.report
+  display flex
+  justify-content space-between
+  flex-direction row
+  background-color rgba(0, 0, 0, 0.06)
+  margin 10px
+.size-4
+  display flex
+  flex-direction row
+  width 100%
+  justify-content space-around
+@media screen and (max-width: 765px){
+  .size-4 {
+    flex-direction: column
+  }
+}
+
 
 </style>
