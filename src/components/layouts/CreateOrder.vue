@@ -103,6 +103,8 @@
 input[type="text"]
   border none
   outline-color rgba(255, 255, 255, 0)
+  max-width 200px
+  width 45%
 ul
   display flex
   flex-direction column
@@ -123,6 +125,5 @@ a
   display flex
   flex-direction row
   justify-content space-around
-
 
 </style>

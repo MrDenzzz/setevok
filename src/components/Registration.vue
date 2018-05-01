@@ -29,7 +29,8 @@
       <p v-if="!((newUser.pass === pass2) === this.focused)">Пароль не совпадает</p>
 
       <div class="reg-b">
-        <router-link @click="madeWorker()" tag="button" to="/worker/:userId" type="submit">Подтвердить</router-link>
+        <!--<router-link  tag="button" to="/worker/:userId" type="submit">Подтвердить</router-link>-->
+        <button  @click="madeWorker()" type="submit">Подтвердить</button>
       </div>
       <!--<button @click="madeWorker()">Проверить создан ли пользователь</button>-->
       <!--</form>-->

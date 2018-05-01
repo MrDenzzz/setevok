@@ -38,9 +38,9 @@
                   <input class="option-input radio" v-model="newReport.type" name="type" value="Скрытая" type="radio" required></p>
                 <p>Открытая
                   <input class="option-input radio" v-model="newReport.type" name="type" value="Открытая" type="radio" required></p>
-          <button @click="madeReport(newReport)">Создать проверку</button>
 
         </div>
+            <button @click="madeReport(newReport)">Создать проверку</button>
             </div>
         </div>
         <!-- </form> -->

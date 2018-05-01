@@ -9,7 +9,7 @@ export const store = new Vuex.Store({
       {
         userId: 123,
         name: "Олег",
-        part: "worker",
+        part: "Исполнитель",
         city: "Волков",
         path: "/worker",
         mail: "z@.ru",
@@ -18,7 +18,7 @@ export const store = new Vuex.Store({
       {
         userId: 124,
         name: "Вася",
-        part: "admin",
+        part: "Администратор",
         city: "Москва",
         path: "/admin",
         mail: "z@.com",

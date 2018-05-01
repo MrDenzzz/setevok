@@ -180,8 +180,4 @@ export default {
 .no-boxshadow .style-form input[type=text]:focus {
     outline: -10px solid rgba(255, 255, 255, 0.1);
 }
-
-label {
-    color: white;
-}
 </style>
