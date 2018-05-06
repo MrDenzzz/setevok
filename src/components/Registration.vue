@@ -29,6 +29,9 @@
       <p v-if="!((newUser.pass === pass2) === this.focused)">Пароль не совпадает</p>
 
       <div class="reg-b">
+        <router-link to="/">
+          <button  class="exit">Назад</button>
+        </router-link>
         <!--<router-link  tag="button" to="/worker/:userId" type="submit">Подтвердить</router-link>-->
         <button  @click="madeWorker()" type="submit">Подтвердить</button>
       </div>
@@ -78,17 +81,17 @@ export default {
           .dispatch("madeNewUser", this.newUser)
           .then(() => {
             console.log("Success Report data request");
-            this.$router.push({
-              path:
-              this.users[i].path + `/${this.newUser.userId}`,
-              params:{
-                userId: this.newUser.userId
-              }
-            });
           })
           .catch(() => {
             console.log("Error Report data request");
           });
+      // this.$router.push({
+      //   path:
+      //   this.users[i].path + `/${this.newUser.userId}`,
+      //   params:{
+      //     userId: this.newUser.userId
+      //   }
+      // });
     },
     // show() {
     //   this.$modal.show(
@@ -144,5 +147,5 @@ export default {
   .reg-b
     width 100%
     display flex
-    justify-content flex-end
+    justify-content space-between
 </style>

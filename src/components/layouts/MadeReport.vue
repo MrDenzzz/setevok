@@ -109,9 +109,10 @@ export default {
     },
     madeReport(newReport) {
       if (
-        !newReport.kind ||
+        (!newReport.kind ||
         !newReport.type ||
-        newReport.cinema === "Выберите кинотеатр"
+        newReport.cinema === "Выберите кинотеатр"||
+          newReport.film === "Выберите фильм")
       ) {
         return false;
       } else {

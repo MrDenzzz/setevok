@@ -1,9 +1,11 @@
 <template>
     <div>
-      <h2>Администратор {{ name }}
+      <div class="admin">
+      <h2>Администратор {{ name }}</h2>
         <router-link to="/">
           <button class="exit">Выход</button>
-        </router-link></h2>
+        </router-link>
+    </div>
       <div class="orderBlocks">
         <div class="size-2">
         <createorder class="form"></createorder>
@@ -66,6 +68,10 @@
     width 100vw
   }
   }
+  .admin
+    display flex
+    justify-content space-between
+    align-items: center;
 
 
 

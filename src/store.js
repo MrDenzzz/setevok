@@ -84,13 +84,25 @@ export const store = new Vuex.Store({
         filled: false
       },
     ],
-    cinemas: [
+    cities: [
       {
         city: "Питер",
         cinema1: "Аврора",
         cinema2: "Лиговъ"
       },
+      {
+        city: "Волков",
+        cinema1: "11111",
+        cinema2: "111"
+      },
     ],
+    messages:[
+      {
+        id:0,
+        title:"Воков",
+        docs:['1','2'],
+        desk:'Не проверишь кинотеатр... На бутылку сядешь.'
+      },],
     // orderList: [
     //   {
     //     id: "0",
@@ -184,6 +196,7 @@ export const store = new Vuex.Store({
     reports: state => state.reports,
     allUsers: state => state.users,
     orders: state => state.orders,
+    cities: state => state.cities,
 
   },
 });
