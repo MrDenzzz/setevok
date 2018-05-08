@@ -1,20 +1,25 @@
 <template>
   <div @drop="_drop" @dragenter="_suppress" @dragover="_suppress">
-    <div class="row"><div class="col-xs-12">
-      <form class="form-inline">
-        <div class="form-group">
-          <label for="file">Spreadsheet</label>
-          <input type="file" class="form-control" id="file" :accept="SheetJSFT" @change="_change" />
+    <div>
+      <div>
+      <form>
+        <div style="display: flex; flex-direction: column; margin: 30px">
+          <label for="file">Добавьте сюда данные для нового заказа(таблица с кинотеатрами и их городами)</label>
+          <!--<input type="file" class="form-control" id="file" :accept="SheetJSFT" @change="_change">-->
+          <div>
+            <label for="files">Загрузить таблицу</label>
+          </div>
+          <input id="files" style="visibility:hidden;" type="file" class="form-control" :accept="SheetJSFT" @change="_change">
         </div>
       </form>
     </div>
     </div>
-    <div class="row"><div class="col-xs-12">
-      <button :disabled="data.length ? false : true" class="btn btn-success" @click="_export">Export</button>
+    <div><div>
+      <button :disabled="data.length ? false : true" @click="_export">Скачать таблицу</button>
     </div></div>
-    <div class="row"><div class="col-xs-12">
-      <div class="table-responsive">
-        <table class="table table-striped">
+    <div><div>
+      <div>
+        <table>
           <thead><tr>
             <th v-for="c in cols" :key="c.key">{{c.name}}</th>
           </tr></thead>
@@ -43,15 +48,15 @@
     // },
     data() {
       return {
-        data: ["SheetJS".split(""), "1234567".split("")],
+        data: ["XlsX".split(""), "File".split("")],
         cols: [
-          {name:"A", key:0},
-          {name:"B", key:1},
-          {name:"C", key:2},
-          {name:"D", key:3},
+          {name:"P", key:0},
+          {name:"U", key:1},
+          {name:"T", key:2},
+          {name:"H", key:3},
           {name:"E", key:4},
-          {name:"F", key:5},
-          {name:"G", key:6},
+          {name:"R", key:5},
+          {name:"E", key:6},
         ],
         SheetJSFT: _SheetJSFT
       }; },
@@ -97,5 +102,13 @@
 </script>
 
 <style scoped>
-
+  #btn {
+    padding-left: 5px;
+    font-size: 14px;
+    border: 1px solid #333;
+    background: #ccc;
+    color: #161;
+    width: 70px;
+    height: 19px;
+  }
 </style>

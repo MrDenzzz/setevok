@@ -3,27 +3,31 @@
     <div>
       <div class="form">
         <label for="" class="red-label">Отчеты исполнителя</label>
+        <div class="info">
+          <p>Дата</p>
+          <p>Город</p>
+          <p>Кинотеатр</p>
+          <p>Фильм</p>
+          <p>Тип</p>
+        </div>
         <ul>
-          <li v-for="(report, index) in reports"
+          <li @click="selectedReport = report" v-for="(report, index) in reports"
               :key = index
               :report="report">
-            <a :report="report" @click="selectedReport = report" >
-              <p>
+            <a class="reportInfo" :report="report" >
+              <p class="reportInfo">
                 {{ report.date }}
               </p>
-              <p>
+              <p class="reportInfo">
                 {{ report.city}}
               </p>
-              <p>
+              <p class="reportInfo">
                 {{ report.cinema}}
               </p>
-              <p>
+              <p class="reportInfo">
                 {{ report.film }}
               </p>
-              <p>
-                {{ report.type}}
-              </p>
-              <p>
+              <p class="reportInfo">
                 {{ report.kind}}
               </p>
             </a>
@@ -33,11 +37,20 @@
       <div class="form">
         <label>{{ user.name }}</label>
         <ul>
-          <li class="info"><p>Город: </p> <p>{{ user.city }}</p></li>
-          <li class="info"><p>Почта: </p> <p>{{ user.mail }}</p></li>
-          <li class="info"><p>Должность: </p> <p>{{ user.part }}</p></li>
+          <li class="info"><p>Город: </p> <p v-if="changeUser">{{ user.city }}</p> <input v-else type="text" v-model="user.city"></li>
+          <li class="info"><p>Почта: </p> <p v-if="changeUser">{{ user.mail }}</p> <input v-else type="text" v-model="user.mail"></li>
+          <li class="info"><p>Должность: </p> <p v-if="changeUser">{{ user.part }}
+          </p>
+            <div class="info" v-else>
+              <p>Администратор</p>
+              <input class="option-input radio" type="radio" name="part" v-model="user.part" value="Администратор">
+              <p>Исполнитель</p>
+              <input class="option-input radio" type="radio" name="part" v-model="user.part" value="Исполнитель">
+            </div>
+          </li>
         </ul>
-        <button>Изменить</button>
+        <button v-if="changeUser" @click="changeUser = !changeUser">Изменить</button>
+        <button v-else @click="changeUser = !changeUser">Принять</button>
         <button>Удалить</button>
 
 
@@ -105,7 +118,8 @@
     data() {
       return {
         id: this.$route.params.userId,
-        selectedReport: null
+        selectedReport: null,
+        changeUser: true
       }
     },
     computed: {
@@ -190,4 +204,6 @@
     flex-direction row
     flex-wrap wrap
     width 100vw
+  .reportInfo
+    margin-right 20px
 </style>

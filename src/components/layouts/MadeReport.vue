@@ -6,7 +6,7 @@
         <div class="date">
             <label for="p">Дата проверки</label><p>{{today}}</p> <p>{{newReport.date}}</p>
         </div>
-        <div class="date">
+        <div class="date next">
             <label for="p">Город</label><p>{{city}}</p>
         </div>
           <div class="date">
@@ -18,7 +18,7 @@
         </div>
           </div>
           <div class="size-3">
-          <div class="date">
+          <div class="date next">
             <label for="p">Фильм</label><p><select  v-model="newReport.film" name="cinema" required>
             <option selected disabled>Выберите фильм</option>
             <option >dobby2</option>
@@ -32,7 +32,7 @@
                 <p>Сеансы
                   <input class="option-input radio" v-model="newReport.kind" name="kind" value="Сеансы" type="radio" required></p>
         </div>
-        <div class="date">
+        <div class="date next">
             <label for="p">Тип проверки</label>
                 <p class="checkbox-label">Скрытая
                   <input class="option-input radio" v-model="newReport.type" name="type" value="Скрытая" type="radio" required></p>
@@ -61,7 +61,7 @@ export default {
       newReport: {
         id: this.$parent.idReport,
         date: "2014-23-02",
-        city: this.$parent.name,
+        city: this.$parent.city,
         cinema: "Выберите кинотеатр",
         kind: "",
         film:"Выберите фильм",

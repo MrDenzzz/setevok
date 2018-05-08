@@ -160,7 +160,6 @@ export default {
     appearance: none;
     cursor: pointer;
   ul
-  ul
     list-style-type: none;
 
 
